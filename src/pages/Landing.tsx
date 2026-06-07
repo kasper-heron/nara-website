@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
 import AnnouncementStrip from "@/components/landing/AnnouncementStrip";
 import LandingNav from "@/components/landing/LandingNav";
 import HeroSection from "@/components/landing/HeroSection";
@@ -21,14 +19,6 @@ import FinalCTASection from "@/components/landing/FinalCTASection";
 import LandingFooter from "@/components/landing/LandingFooter";
 
 const Landing = () => {
-  const { isAuthenticated } = useAuth();
-  const navigate = useNavigate();
-
-  if (isAuthenticated) {
-    navigate("/dashboard", { replace: true });
-    return null;
-  }
-
   return (
     <div className="min-h-screen bg-background text-foreground">
       <AnnouncementStrip />

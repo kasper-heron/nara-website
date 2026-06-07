@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 272 120" width="272" height="120">
+  <defs>
+    <linearGradient id="bar-blue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#60A5FA"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-50%" width="140%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Top bar -->
+  <rect x="0" y="24" width="154" height="22" rx="11" fill="#FFFFFF" opacity="0.35"/>
+  <!-- Middle bar – blue, glowing -->
+  <rect x="0" y="60" width="216" height="22" rx="11" fill="url(#bar-blue)" filter="url(#glow)"/>
+  <!-- Bottom bar -->
+  <rect x="0" y="96" width="120" height="22" rx="11" fill="#FFFFFF" opacity="0.35"/>
+</svg>

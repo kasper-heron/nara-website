@@ -1,0 +1,244 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Light mode is DEFAULT (for landing page) */
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 6%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 6%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 6%;
+
+    --primary: 217 91% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 40 11% 97%;
+    --secondary-foreground: 0 0% 6%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 218 11% 65%;
+
+    --accent: 217 91% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 86% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 72% 29%;
+    --warning: 43 96% 56%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 217 91% 53%;
+
+    --radius: 0.75rem;
+
+    --surface: 40 11% 97%;
+    --surface-raised: 220 20% 98%;
+
+    --text-secondary: 0 0% 29%;
+    --text-muted: 218 11% 65%;
+
+    --chart-grid: 37 13% 88%;
+
+    --sidebar-background: 222 47% 11%;
+    --sidebar-foreground: 215 16% 47%;
+    --sidebar-primary: 217 91% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 217 33% 17%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 217 33% 17%;
+    --sidebar-ring: 217 91% 53%;
+
+    --navy: 222 47% 11%;
+    --navy-border: 217 33% 17%;
+    --navy-text: 215 16% 47%;
+    --navy-muted: 215 19% 35%;
+  }
+
+  /* Dark mode for dashboard (applied via .dark class) */
+  .dark {
+    --background: 240 7% 6%;        /* #0E0E10 */
+    --foreground: 0 0% 100%;
+
+    --card: 240 5% 11%;             /* #1A1A1C */
+    --card-foreground: 0 0% 100%;
+
+    --popover: 240 5% 11%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 217 91% 53%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 5% 11%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 240 4% 16%;            /* #242428 */
+    --muted-foreground: 220 9% 46%; /* #6B7280 */
+
+    --accent: 217 91% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 72% 29%;
+    --warning: 38 92% 50%;
+
+    --border: 0 0% 100% / 0.07;
+    --input: 0 0% 100% / 0.07;
+    --ring: 217 91% 53%;
+
+    --surface: 240 5% 11%;          /* #1A1A1C */
+    --surface-raised: 240 4% 16%;   /* #242428 */
+
+    --text-secondary: 220 9% 46%;
+    --text-muted: 220 9% 46%;
+
+    --chart-grid: 0 0% 100% / 0.06;
+
+    --sidebar-background: 240 5% 11%;
+    --sidebar-foreground: 220 9% 46%;
+    --sidebar-primary: 217 91% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 100% / 0.08;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 100% / 0.07;
+    --sidebar-ring: 217 91% 53%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #FFFFFF 0%, #888888 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-surface-alt {
+    background-color: hsl(var(--surface));
+  }
+
+  .landing-section {
+    @apply py-[120px] px-6;
+  }
+
+  .landing-section-sm {
+    @apply py-[72px] px-6;
+  }
+
+  .section-label {
+    @apply text-[11px] font-medium uppercase tracking-[0.1em] text-muted-foreground mb-6;
+  }
+
+  .section-headline {
+    @apply text-[42px] font-bold tracking-[-1.5px] leading-[1.1] text-foreground;
+  }
+
+  .section-subheadline {
+    @apply text-lg leading-relaxed max-w-[520px] mx-auto;
+    color: hsl(var(--text-secondary));
+  }
+
+  .grid-bg {
+    background-image: 
+      linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .btn-primary-pill {
+    @apply bg-primary text-primary-foreground font-semibold rounded-full hover:opacity-90 transition-all duration-150;
+    padding: 14px 28px;
+    font-size: 15px;
+  }
+
+  .btn-primary-pill:hover {
+    transform: scale(1.02);
+    background-color: hsl(224 76% 48%);
+  }
+
+  .btn-secondary-pill {
+    @apply rounded-full font-semibold transition-all duration-150 text-foreground;
+    padding: 14px 28px;
+    font-size: 15px;
+    border: 1.5px solid hsl(220 13% 84%);
+    background: transparent;
+  }
+
+  .btn-secondary-pill:hover {
+    background-color: hsl(220 20% 98%);
+  }
+
+  .card-landing {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05), 0 4px 16px rgba(0,0,0,0.04);
+  }
+
+  .input-pill {
+    @apply w-full text-foreground placeholder:text-muted-foreground focus:outline-none transition-colors;
+    height: 46px;
+    border: 1px solid hsl(var(--border));
+    border-radius: 999px;
+    padding: 0 20px;
+    font-size: 15px;
+    background: hsl(var(--card));
+  }
+
+  .input-pill:focus {
+    border-color: hsl(var(--primary));
+  }
+}
+
+@layer components {
+  @media (max-width: 768px) {
+    .landing-section {
+      @apply py-[72px] px-5;
+    }
+
+    .section-headline {
+      @apply text-[30px] tracking-[-1px];
+    }
+  }
+}

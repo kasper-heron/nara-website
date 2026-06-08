@@ -45,6 +45,11 @@ const LandingFooter = () => (
         >
           hei@naraflow.no
         </a>
+        <div className="mt-4">
+          <Link to="/personvern" className="text-sm hover:text-white transition-colors" style={{ color: "hsl(215 16% 47%)" }}>
+            Personvernerklæring
+          </Link>
+        </div>
       </div>
     </div>
   </footer>

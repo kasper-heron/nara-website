@@ -3,6 +3,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Landing from "./pages/Landing";
+import Personvern from "./pages/Personvern";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/"             element={<Landing />} />
+          <Route path="/personvern"   element={<Personvern />} />
           <Route path="/logg-inn"     element={<AppRedirect />} />
           <Route path="/login"        element={<AppRedirect />} />
           <Route path="/kom-i-gang"   element={<AppRedirect />} />

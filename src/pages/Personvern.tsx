@@ -86,7 +86,7 @@ export default function Personvern() {
           <p style={{ fontSize: 13, color: "#94a3b8", marginBottom: 56 }}>
             Sist oppdatert:{" "}
             {new Date().toLocaleDateString("no-NO", { day: "numeric", month: "long", year: "numeric" })}
-            {" "}· NARA AS, org. nr. [fyll inn]
+            {" "}· NARA
           </p>
 
           <Section
@@ -391,8 +391,7 @@ export default function Personvern() {
                 borderRadius: 12,
               }}
             >
-              <p style={{ margin: "0 0 4px", fontWeight: 700, color: "#0f172a" }}>NARA AS</p>
-              <p style={{ margin: "0 0 4px", color: "#475569", fontSize: 14 }}>Org. nr.: [fyll inn]</p>
+              <p style={{ margin: "0 0 4px", fontWeight: 700, color: "#0f172a" }}>NARA</p>
               <a href="mailto:hei@naraflow.no" style={{ color: "#2563EB", fontSize: 14 }}>hei@naraflow.no</a>
             </div>
           </Section>

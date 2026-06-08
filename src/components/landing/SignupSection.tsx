@@ -9,6 +9,7 @@ const SignupSection = () => {
   const { ref, visible } = useFadeIn();
 
   const [form, setForm] = useState({ company_name: "", email: "", password: "", orgnr: "" });
+  const [mvaRegistrert, setMvaRegistrert] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -27,10 +28,11 @@ const SignupSection = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          company_name: form.company_name,
-          email:        form.email,
-          password:     form.password,
-          org_number:   form.orgnr || undefined,
+          company_name:   form.company_name,
+          email:          form.email,
+          password:       form.password,
+          org_number:     form.orgnr || undefined,
+          mva_registered: mvaRegistrert,
         }),
       });
       const data = await res.json();
@@ -38,7 +40,7 @@ const SignupSection = () => {
         throw new Error(data.error || "Noe gikk galt ved registrering");
       }
       setSuccess(`Velkommen, ${form.company_name}! Kontoen din er klar.`);
-      setTimeout(() => { window.location.href = APP_URL }, 2000);
+      setTimeout(() => { window.location.href = `${APP_URL}/onboarding` }, 2000);
     } catch (err: any) {
       setError(err.message || "Noe gikk galt. Prøv igjen.");
     } finally {
@@ -119,6 +121,37 @@ const SignupSection = () => {
                 placeholder="Organisasjonsnummer (valgfritt)"
                 disabled={loading}
               />
+
+              {/* MVA-status */}
+              <div
+                className="flex items-center justify-between px-4 py-3 rounded-full"
+                style={{ border: "1px solid hsl(220 13% 88%)", background: "hsl(220 13% 98%)" }}
+              >
+                <span style={{ fontSize: 14, color: "hsl(220 9% 30%)" }}>
+                  MVA-registrert bedrift
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setMvaRegistrert(!mvaRegistrert)}
+                  disabled={loading}
+                  className="relative flex-none transition-colors"
+                  style={{
+                    width: 40, height: 22, borderRadius: 11,
+                    background: mvaRegistrert ? "hsl(214 95% 55%)" : "hsl(220 13% 78%)",
+                  }}
+                >
+                  <span
+                    className="absolute top-[3px] transition-all"
+                    style={{
+                      left: mvaRegistrert ? 21 : 3,
+                      width: 16, height: 16, borderRadius: "50%",
+                      background: "#fff",
+                      boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
+                    }}
+                  />
+                </button>
+              </div>
+
               {error && <p className="text-sm text-destructive text-center">{error}</p>}
               <button
                 type="submit"

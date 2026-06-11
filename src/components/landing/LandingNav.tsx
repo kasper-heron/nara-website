@@ -4,21 +4,12 @@ import { Menu, X } from "lucide-react";
 const APP_URL = "https://app.naraflow.no";
 
 const NaraLogo = () => (
-  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="32" height="32" rx="8" fill="#2563EB"/>
-    <path
-      d="M8 24V8L16 20V8"
-      stroke="white"
-      strokeWidth="3"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M16 8L24 24"
-      stroke="white"
-      strokeWidth="3"
-      strokeLinecap="round"
-    />
+  <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="34" height="34" rx="9" fill="#2563EB"/>
+    {/* N shape: left vertical, diagonal, right vertical */}
+    <line x1="10" y1="9" x2="10" y2="25" stroke="white" strokeWidth="2.8" strokeLinecap="round"/>
+    <line x1="10" y1="9" x2="24" y2="25" stroke="white" strokeWidth="2.8" strokeLinecap="round"/>
+    <line x1="24" y1="9" x2="24" y2="25" stroke="white" strokeWidth="2.8" strokeLinecap="round"/>
   </svg>
 );
 
@@ -40,92 +31,74 @@ const LandingNav = () => {
   return (
     <nav
       className={`fixed top-0 w-full z-40 transition-all duration-200 ${
-        scrolled
-          ? "bg-white/95 backdrop-blur-xl shadow-sm border-b border-slate-100"
-          : "bg-white"
+        scrolled ? "bg-white/95 backdrop-blur-xl shadow-sm border-b border-slate-100" : "bg-white"
       }`}
       style={{ height: 64 }}
     >
-      <div className="max-w-[1100px] mx-auto flex items-center justify-between px-6 h-full">
+      <div className="max-w-[1160px] mx-auto flex items-center justify-between px-6 h-full">
         {/* Logo */}
         <div className="flex items-center gap-2.5">
           <NaraLogo />
-          <span className="text-lg font-bold tracking-tight text-slate-900">nara</span>
+          <span className="text-[17px] font-bold tracking-tight" style={{ color: "#0a2540" }}>nara</span>
         </div>
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-8">
-          <button
-            onClick={() => scrollTo("how-it-works")}
-            className="text-sm text-slate-600 hover:text-slate-900 transition-colors font-medium"
-          >
-            Slik fungerer det
-          </button>
-          <button
-            onClick={() => scrollTo("features")}
-            className="text-sm text-slate-600 hover:text-slate-900 transition-colors font-medium"
-          >
-            Funksjoner
-          </button>
-          <button
-            onClick={() => scrollTo("priser")}
-            className="text-sm text-slate-600 hover:text-slate-900 transition-colors font-medium"
-          >
-            Priser
-          </button>
+          {[
+            { label: "Slik fungerer det", id: "how-it-works" },
+            { label: "Funksjoner", id: "features" },
+            { label: "Priser", id: "priser" },
+          ].map((item) => (
+            <button
+              key={item.id}
+              onClick={() => scrollTo(item.id)}
+              className="text-sm font-medium transition-colors"
+              style={{ color: "#425466" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#0a2540")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "#425466")}
+            >
+              {item.label}
+            </button>
+          ))}
         </div>
 
-        {/* CTA */}
+        {/* Right CTAs */}
         <div className="hidden md:flex items-center gap-4">
           <a
             href={APP_URL}
-            className="text-sm text-slate-600 hover:text-slate-900 transition-colors font-medium"
+            className="text-sm font-medium transition-colors"
+            style={{ color: "#425466" }}
           >
             Logg inn
           </a>
           <button
             onClick={() => scrollTo("signup")}
-            className="bg-[#2563EB] text-white text-sm font-semibold rounded-lg hover:bg-[#1d4ed8] transition-colors"
-            style={{ padding: "9px 18px" }}
+            className="text-sm font-semibold text-white rounded-lg transition-colors"
+            style={{ padding: "9px 20px", background: "#635BFF" }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#5144e0")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "#635BFF")}
           >
             Kom i gang
           </button>
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden text-slate-700"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
+        {/* Mobile */}
+        <button className="md:hidden" style={{ color: "#0a2540" }} onClick={() => setMobileOpen(!mobileOpen)}>
           {mobileOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
-      {/* Mobile drawer */}
       {mobileOpen && (
         <>
-          <div
-            className="fixed inset-0 bg-black/20 z-40 md:hidden"
-            style={{ top: 64 }}
-            onClick={() => setMobileOpen(false)}
-          />
+          <div className="fixed inset-0 bg-black/20 z-40 md:hidden" style={{ top: 64 }} onClick={() => setMobileOpen(false)} />
           <div className="fixed right-0 top-16 bottom-0 w-72 bg-white border-l border-slate-100 z-50 md:hidden p-8 flex flex-col gap-6">
-            <button onClick={() => scrollTo("how-it-works")} className="text-base text-slate-700 font-medium text-left">
-              Slik fungerer det
-            </button>
-            <button onClick={() => scrollTo("features")} className="text-base text-slate-700 font-medium text-left">
-              Funksjoner
-            </button>
-            <button onClick={() => scrollTo("priser")} className="text-base text-slate-700 font-medium text-left">
-              Priser
-            </button>
-            <a href={APP_URL} className="text-base text-slate-700 font-medium" onClick={() => setMobileOpen(false)}>
-              Logg inn
-            </a>
-            <button
-              onClick={() => scrollTo("signup")}
-              className="bg-[#2563EB] text-white font-semibold rounded-lg py-3 text-sm mt-2"
-            >
+            {["how-it-works", "features", "priser"].map((id) => (
+              <button key={id} onClick={() => scrollTo(id)} className="text-base font-medium text-left" style={{ color: "#0a2540" }}>
+                {id === "how-it-works" ? "Slik fungerer det" : id === "features" ? "Funksjoner" : "Priser"}
+              </button>
+            ))}
+            <a href={APP_URL} className="text-base font-medium" style={{ color: "#0a2540" }}>Logg inn</a>
+            <button onClick={() => scrollTo("signup")} className="text-white font-semibold rounded-lg py-3 text-sm mt-2" style={{ background: "#635BFF" }}>
               Kom i gang
             </button>
           </div>

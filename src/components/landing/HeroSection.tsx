@@ -1,11 +1,11 @@
-import { CheckCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const invoices = [
-  { vendor: "Telenor AS", amount: "2 400 kr", category: "Telekommunikasjon", status: "Bokført" },
-  { vendor: "Norwegian Air", amount: "4 870 kr", category: "Reise", status: "Bokført" },
-  { vendor: "Circle K", amount: "1 230 kr", category: "Drivstoff", status: "Bokført" },
-  { vendor: "Google Ads", amount: "3 200 kr", category: "Markedsføring", status: "Bokført" },
-  { vendor: "Bring Logistics", amount: "890 kr", category: "Frakt", status: "Bokført" },
+  { vendor: "Telenor AS", amount: "2 400 kr", category: "Telekommunikasjon" },
+  { vendor: "Norwegian Air", amount: "4 870 kr", category: "Reise" },
+  { vendor: "Circle K", amount: "1 230 kr", category: "Drivstoff" },
+  { vendor: "Google Ads", amount: "3 200 kr", category: "Markedsføring" },
+  { vendor: "Bring Logistics", amount: "890 kr", category: "Frakt" },
 ];
 
 const HeroSection = () => {
@@ -14,62 +14,116 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center bg-white" style={{ paddingTop: 64 }}>
-      {/* Subtle blue gradient background */}
+    <section className="relative overflow-hidden bg-white" style={{ paddingTop: 64, minHeight: "100vh" }}>
+
+      {/* Stripe-style colorful gradient — right side */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse 80% 50% at 50% -10%, rgba(37,99,235,0.08) 0%, transparent 70%)",
-          top: 64,
+          background: `
+            radial-gradient(ellipse 55% 80% at 95% 40%, rgba(99,91,255,0.25) 0%, transparent 60%),
+            radial-gradient(ellipse 40% 60% at 85% 10%, rgba(37,99,235,0.2) 0%, transparent 55%),
+            radial-gradient(ellipse 50% 70% at 100% 80%, rgba(139,92,246,0.15) 0%, transparent 60%),
+            radial-gradient(ellipse 30% 40% at 75% 60%, rgba(236,72,153,0.08) 0%, transparent 50%)
+          `,
         }}
       />
 
-      <div className="relative max-w-[1100px] mx-auto w-full px-6 flex flex-col lg:flex-row items-center gap-16 py-20">
+      {/* Animated flowing shape — like Stripe's gradient wave */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          right: "-5%",
+          top: "5%",
+          width: "55%",
+          height: "90%",
+          background: "linear-gradient(135deg, rgba(99,91,255,0.18) 0%, rgba(37,99,235,0.22) 30%, rgba(139,92,246,0.15) 60%, rgba(236,72,153,0.1) 100%)",
+          borderRadius: "40% 60% 50% 70% / 50% 40% 60% 50%",
+          filter: "blur(40px)",
+          animation: "float 8s ease-in-out infinite",
+        }}
+      />
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          right: "5%",
+          top: "20%",
+          width: "40%",
+          height: "60%",
+          background: "linear-gradient(160deg, rgba(37,99,235,0.12) 0%, rgba(99,91,255,0.18) 50%, rgba(234,179,8,0.08) 100%)",
+          borderRadius: "60% 40% 70% 30% / 40% 60% 40% 60%",
+          filter: "blur(30px)",
+          animation: "float 6s ease-in-out infinite reverse",
+        }}
+      />
+
+      <style>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(-20px) scale(1.03); }
+        }
+      `}</style>
+
+      <div className="relative max-w-[1160px] mx-auto w-full px-6 flex flex-col lg:flex-row items-center gap-12 py-24">
 
         {/* Left */}
-        <div className="lg:w-[50%]">
+        <div className="lg:w-[52%] z-10">
           <div
-            className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 py-1.5 mb-8"
-            style={{ fontSize: 13 }}
+            className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-8 text-xs font-semibold"
+            style={{ border: "1px solid rgba(99,91,255,0.25)", background: "rgba(99,91,255,0.05)", color: "#635BFF" }}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] inline-block" />
-            <span className="text-[#2563EB] font-medium">Nå tilgjengelig for norske bedrifter</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#635BFF] inline-block" />
+            Nå tilgjengelig for norske bedrifter
           </div>
 
           <h1
-            className="font-extrabold text-slate-900 leading-tight"
-            style={{ fontSize: "clamp(42px, 5vw, 64px)", letterSpacing: "-2px", lineHeight: 1.08 }}
+            className="font-extrabold leading-tight"
+            style={{
+              fontSize: "clamp(48px, 6vw, 76px)",
+              letterSpacing: "-3px",
+              lineHeight: 1.05,
+              color: "#0a2540",
+            }}
           >
-            Regnskap som<br />
-            <span style={{ color: "#2563EB" }}>gjør seg selv.</span>
+            Regnskap som
+            <br />
+            <span style={{ color: "#635BFF" }}>gjør seg selv.</span>
           </h1>
 
-          <p className="mt-6 text-slate-500 leading-relaxed max-w-[440px]" style={{ fontSize: 18, lineHeight: 1.7 }}>
-            Koble til Gmail eller Outlook. NARA leser alle fakturaer automatisk,
-            kategoriserer dem og synkroniserer med Fiken. Du trenger ikke løfte en finger.
+          <p
+            className="mt-6 max-w-[460px] leading-relaxed"
+            style={{ fontSize: 18, color: "#425466", lineHeight: 1.75 }}
+          >
+            Koble til Gmail eller Outlook. NARA leser alle fakturaer
+            automatisk, kategoriserer dem og synkroniserer direkte med Fiken.
+            Du trenger ikke løfte en finger.
           </p>
 
           <div className="flex flex-wrap gap-3 mt-10">
             <button
               onClick={() => scrollTo("signup")}
-              className="bg-[#2563EB] text-white font-semibold rounded-lg hover:bg-[#1d4ed8] transition-colors"
-              style={{ padding: "12px 24px", fontSize: 15 }}
+              className="flex items-center gap-2 text-white font-semibold rounded-lg transition-all"
+              style={{ padding: "13px 26px", fontSize: 15, background: "#635BFF" }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "#5144e0")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "#635BFF")}
             >
-              Kom i gang gratis
+              Kom i gang gratis <ArrowRight size={16} />
             </button>
             <button
               onClick={() => scrollTo("how-it-works")}
-              className="text-slate-700 font-semibold rounded-lg border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-colors"
-              style={{ padding: "12px 24px", fontSize: 15 }}
+              className="font-semibold rounded-lg transition-all border"
+              style={{ padding: "13px 26px", fontSize: 15, color: "#0a2540", borderColor: "#d1d9e0", background: "white" }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "#f6f9fc")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "white")}
             >
               Se hvordan det fungerer
             </button>
           </div>
 
-          <div className="flex items-center gap-5 mt-8 flex-wrap">
+          <div className="flex items-center gap-6 mt-8 flex-wrap">
             {["Ingen kredittkort", "14 dager gratis", "Kanseller når som helst"].map((label, i) => (
-              <span key={i} className="flex items-center gap-1.5 text-slate-400" style={{ fontSize: 13 }}>
-                <CheckCircle size={13} className="text-[#2563EB]" />
+              <span key={i} className="flex items-center gap-1.5 text-xs font-medium" style={{ color: "#8898aa" }}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#635BFF" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                 {label}
               </span>
             ))}
@@ -77,48 +131,44 @@ const HeroSection = () => {
         </div>
 
         {/* Right – product card */}
-        <div className="lg:w-[50%] w-full">
+        <div className="lg:w-[48%] w-full z-10">
           <div
             className="rounded-2xl overflow-hidden"
             style={{
-              border: "1px solid #e2e8f0",
-              boxShadow: "0 20px 60px rgba(37,99,235,0.1), 0 4px 16px rgba(0,0,0,0.06)",
+              border: "1px solid rgba(255,255,255,0.8)",
+              boxShadow: "0 30px 80px rgba(10,37,64,0.12), 0 8px 24px rgba(10,37,64,0.06)",
+              background: "white",
             }}
           >
-            {/* Window bar */}
-            <div className="bg-slate-50 border-b border-slate-100 px-5 py-3.5 flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-slate-200" />
-              <span className="w-2.5 h-2.5 rounded-full bg-slate-200" />
-              <span className="w-2.5 h-2.5 rounded-full bg-slate-200" />
-              <span className="ml-3 text-xs text-slate-400 font-mono">app.naraflow.no</span>
+            {/* Window chrome */}
+            <div style={{ background: "#f6f9fc", borderBottom: "1px solid #e3e8ef", padding: "12px 16px" }} className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#ff5f57" }} />
+              <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#febc2e" }} />
+              <span className="w-2.5 h-2.5 rounded-full" style={{ background: "#28c840" }} />
+              <span className="ml-3 text-xs font-mono" style={{ color: "#8898aa" }}>app.naraflow.no</span>
               <div className="ml-auto flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
-                <span className="text-xs text-green-600 font-medium">Live</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+                <span className="text-xs font-medium text-green-600">Live</span>
               </div>
             </div>
 
-            {/* Content */}
-            <div className="bg-white p-6">
+            {/* App content */}
+            <div className="p-6">
               <div className="flex items-center justify-between mb-5">
                 <div>
-                  <p className="font-semibold text-slate-900" style={{ fontSize: 15 }}>Innboks</p>
-                  <p className="text-slate-400 text-xs mt-0.5">Siste 30 dager</p>
+                  <p className="font-bold text-sm" style={{ color: "#0a2540" }}>Innboks</p>
+                  <p className="text-xs mt-0.5" style={{ color: "#8898aa" }}>Siste 30 dager · 5 bilag</p>
                 </div>
-                <div
-                  className="rounded-lg px-3 py-1.5 text-xs font-semibold"
-                  style={{ background: "#eff6ff", color: "#2563EB" }}
-                >
-                  5 bilag behandlet
+                <div className="rounded-full text-xs font-semibold px-3 py-1" style={{ background: "rgba(99,91,255,0.08)", color: "#635BFF" }}>
+                  Fiken synkronisert ✓
                 </div>
               </div>
 
-              <div className="rounded-xl border border-slate-100 overflow-hidden">
-                <div className="grid text-xs font-semibold text-slate-400 px-4 py-2.5 border-b border-slate-100 bg-slate-50"
-                  style={{ gridTemplateColumns: "1fr 1fr auto" }}
-                >
+              <div className="rounded-xl overflow-hidden" style={{ border: "1px solid #e3e8ef" }}>
+                <div className="grid text-xs font-semibold px-4 py-2.5" style={{ gridTemplateColumns: "1fr 1fr auto", background: "#f6f9fc", color: "#8898aa", borderBottom: "1px solid #e3e8ef" }}>
                   <span>Leverandør</span>
                   <span>Kategori</span>
-                  <span className="text-right">Beløp</span>
+                  <span>Beløp</span>
                 </div>
                 {invoices.map((inv, i) => (
                   <div
@@ -126,31 +176,25 @@ const HeroSection = () => {
                     className="grid px-4 py-3 items-center"
                     style={{
                       gridTemplateColumns: "1fr 1fr auto",
-                      borderBottom: i < invoices.length - 1 ? "1px solid #f1f5f9" : "none",
+                      borderBottom: i < invoices.length - 1 ? "1px solid #f0f4f8" : "none",
                     }}
                   >
-                    <span className="font-medium text-slate-800 text-sm">{inv.vendor}</span>
-                    <span className="text-xs text-slate-400">{inv.category}</span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-medium text-slate-700">{inv.amount}</span>
-                      <span
-                        className="text-xs font-medium rounded-full px-2 py-0.5"
-                        style={{ background: "#f0fdf4", color: "#16a34a" }}
-                      >
-                        {inv.status}
-                      </span>
-                    </div>
+                    <span className="text-sm font-semibold" style={{ color: "#0a2540" }}>{inv.vendor}</span>
+                    <span className="text-xs" style={{ color: "#8898aa" }}>{inv.category}</span>
+                    <span className="text-sm font-medium" style={{ color: "#425466" }}>{inv.amount}</span>
                   </div>
                 ))}
               </div>
 
               <div
-                className="mt-4 rounded-xl px-4 py-3 flex items-center gap-2"
-                style={{ background: "#eff6ff" }}
+                className="mt-4 rounded-xl px-4 py-3 flex items-center gap-2.5"
+                style={{ background: "rgba(99,91,255,0.06)", border: "1px solid rgba(99,91,255,0.12)" }}
               >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                <p className="text-xs font-medium" style={{ color: "#2563EB" }}>
-                  NARA koblet til Fiken — alt er klart for bokføring
+                <div className="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "#635BFF" }}>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <p className="text-xs font-medium" style={{ color: "#635BFF" }}>
+                  5 bilag behandlet og klart for godkjenning i Fiken
                 </p>
               </div>
             </div>

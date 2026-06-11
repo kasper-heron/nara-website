@@ -4,13 +4,13 @@ import { Menu, X } from "lucide-react";
 const APP_URL = "https://app.naraflow.no";
 
 const NaraLogo = () => (
-  <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="34" height="34" rx="9" fill="#2563EB"/>
-    {/* N shape: left vertical, diagonal, right vertical */}
-    <line x1="10" y1="9" x2="10" y2="25" stroke="white" strokeWidth="2.8" strokeLinecap="round"/>
-    <line x1="10" y1="9" x2="24" y2="25" stroke="white" strokeWidth="2.8" strokeLinecap="round"/>
-    <line x1="24" y1="9" x2="24" y2="25" stroke="white" strokeWidth="2.8" strokeLinecap="round"/>
-  </svg>
+  <img
+    src="/nara-logo.svg"
+    alt="NARA"
+    width={36}
+    height={36}
+    style={{ borderRadius: 9, display: "block", objectFit: "cover" }}
+  />
 );
 
 const LandingNav = () => {

@@ -5,11 +5,13 @@ const scrollTo = (id: string) => {
 };
 
 const NaraLogo = () => (
-  <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="32" height="32" rx="8" fill="#2563EB"/>
-    <path d="M8 24V8L16 20V8" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-    <path d="M16 8L24 24" stroke="white" strokeWidth="3" strokeLinecap="round"/>
-  </svg>
+  <img
+    src="/nara-logo.svg"
+    alt="NARA"
+    width={32}
+    height={32}
+    style={{ borderRadius: 8, display: "block", objectFit: "cover" }}
+  />
 );
 
 const LandingFooter = () => (

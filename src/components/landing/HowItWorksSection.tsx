@@ -1,4 +1,4 @@
-import { Mail, Sparkles, LayoutDashboard, CheckCircle } from "lucide-react";
+import { Mail, Sparkles, ArrowRight, CheckCircle } from "lucide-react";
 import { useFadeIn } from "@/hooks/useFadeIn";
 
 const steps = [
@@ -6,25 +6,25 @@ const steps = [
     num: "01",
     icon: Mail,
     title: "Koble til innboksen",
-    desc: "Logg inn med Gmail eller Outlook. Én gang. NARA har tilgang og begynner å jobbe umiddelbart.",
+    desc: "Logg inn med Gmail eller Outlook. Tar 2 minutter. NARA begynner å jobbe umiddelbart.",
   },
   {
     num: "02",
     icon: Sparkles,
-    title: "NARA henter og organiserer",
-    desc: "Alle fakturaer leses, kategoriseres og sorteres automatisk – etter år, måned, leverandør og prosjekt. Uten at du gjør noe.",
+    title: "AI leser og kategoriserer",
+    desc: "Fakturaer, kvitteringer og bilag hentes ut automatisk. GPT-4o leser innholdet og finner riktig konto.",
   },
   {
     num: "03",
-    icon: LayoutDashboard,
-    title: "Du har full oversikt",
-    desc: "Åpne NARA og se hele økonomien din strukturert og klar. Spør NARA om hva som helst – på norsk.",
+    icon: ArrowRight,
+    title: "Synkroniseres med Fiken",
+    desc: "Alt bokføres automatisk i Fiken. Regnskapsfører logger inn og godkjenner — uten å lete etter noe.",
   },
   {
     num: "04",
     icon: CheckCircle,
-    title: "Regnskapsfører godkjenner",
-    desc: "Alt er klart når regnskapsfører logger inn. Ingen purring. Ingen leting. De godkjenner og eksporterer. Ferdig.",
+    title: "Du har full kontroll",
+    desc: "Se hele økonomien i sanntid. Still NARA spørsmål på norsk. Få svar med en gang.",
   },
 ];
 
@@ -32,43 +32,40 @@ const HowItWorksSection = () => {
   const { ref, visible } = useFadeIn();
 
   return (
-    <section className="landing-section bg-surface-alt">
+    <section id="how-it-works" className="py-24 bg-slate-50">
       <div
         ref={ref}
-        className={`max-w-[1100px] mx-auto text-center transition-all duration-500 ${
+        className={`max-w-[1100px] mx-auto px-6 transition-all duration-500 ${
           visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
         }`}
       >
-        <p className="section-label">SLIK FUNGERER DET</p>
-        <h2 className="section-headline mb-4">Fire steg. Null innsats.</h2>
-        <p className="section-subheadline mb-16">
-          Alt som skjer mellom «send» og «bokført» tar NARA seg av.
-        </p>
+        <div className="text-center mb-16">
+          <p className="text-xs font-semibold text-[#2563EB] tracking-widest uppercase mb-4">
+            Slik fungerer det
+          </p>
+          <h2 className="font-extrabold text-slate-900" style={{ fontSize: "clamp(32px, 4vw, 48px)", letterSpacing: "-1.5px" }}>
+            Fire steg. Null innsats.
+          </h2>
+          <p className="mt-4 text-slate-500 max-w-[480px] mx-auto" style={{ fontSize: 17, lineHeight: 1.7 }}>
+            Alt som skjer mellom «mottatt faktura» og «bokført» håndterer NARA automatisk.
+          </p>
+        </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 relative">
-          <div className="hidden lg:block absolute top-[52px] left-[12.5%] right-[12.5%] h-px bg-border" />
-
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((step, i) => (
             <div
               key={i}
-              className="card-landing text-left relative hover:-translate-y-1 transition-transform duration-200"
+              className="bg-white rounded-2xl p-7 border border-slate-100 hover:shadow-md hover:-translate-y-1 transition-all duration-200"
+              style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}
             >
-              <div className="relative mb-3">
-                <span
-                  className="font-extrabold"
-                  style={{ fontSize: 52, color: "hsl(226 100% 97%)", lineHeight: 1 }}
-                >
-                  {step.num}
-                </span>
-                <step.icon
-                  size={24}
-                  className="text-primary absolute bottom-1 left-12"
-                />
+              <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center mb-5">
+                <step.icon size={18} className="text-[#2563EB]" />
               </div>
-              <h3 className="font-bold text-foreground mt-3" style={{ fontSize: 19 }}>
+              <p className="text-xs font-bold text-slate-300 mb-2">{step.num}</p>
+              <h3 className="font-bold text-slate-900 mb-2" style={{ fontSize: 17 }}>
                 {step.title}
               </h3>
-              <p className="mt-2" style={{ fontSize: 15, color: "hsl(220 9% 46%)", lineHeight: 1.65 }}>
+              <p className="text-slate-500 leading-relaxed" style={{ fontSize: 14, lineHeight: 1.65 }}>
                 {step.desc}
               </p>
             </div>

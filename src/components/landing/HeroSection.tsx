@@ -70,9 +70,9 @@ const HeroSection = () => {
         <div className="lg:w-[52%] z-10">
           <div
             className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-8 text-xs font-semibold"
-            style={{ border: "1px solid rgba(99,91,255,0.25)", background: "rgba(99,91,255,0.05)", color: "#635BFF" }}
+            style={{ border: "1px solid rgba(99,91,255,0.25)", background: "rgba(99,91,255,0.05)", color: "#2563EB" }}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#635BFF] inline-block" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB] inline-block" />
             Nå tilgjengelig for norske bedrifter
           </div>
 
@@ -87,7 +87,7 @@ const HeroSection = () => {
           >
             Regnskap som
             <br />
-            <span style={{ color: "#635BFF" }}>gjør seg selv.</span>
+            <span style={{ color: "#2563EB" }}>gjør seg selv.</span>
           </h1>
 
           <p
@@ -103,9 +103,9 @@ const HeroSection = () => {
             <button
               onClick={() => scrollTo("signup")}
               className="flex items-center gap-2 text-white font-semibold rounded-lg transition-all"
-              style={{ padding: "13px 26px", fontSize: 15, background: "#635BFF" }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = "#5144e0")}
-              onMouseLeave={(e) => (e.currentTarget.style.background = "#635BFF")}
+              style={{ padding: "13px 26px", fontSize: 15, background: "#2563EB" }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = "#1d4ed8")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "#2563EB")}
             >
               Kom i gang gratis <ArrowRight size={16} />
             </button>
@@ -123,7 +123,7 @@ const HeroSection = () => {
           <div className="flex items-center gap-6 mt-8 flex-wrap">
             {["Ingen kredittkort", "14 dager gratis", "Kanseller når som helst"].map((label, i) => (
               <span key={i} className="flex items-center gap-1.5 text-xs font-medium" style={{ color: "#8898aa" }}>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#635BFF" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                 {label}
               </span>
             ))}
@@ -159,7 +159,7 @@ const HeroSection = () => {
                   <p className="font-bold text-sm" style={{ color: "#0a2540" }}>Innboks</p>
                   <p className="text-xs mt-0.5" style={{ color: "#8898aa" }}>Siste 30 dager · 5 bilag</p>
                 </div>
-                <div className="rounded-full text-xs font-semibold px-3 py-1" style={{ background: "rgba(99,91,255,0.08)", color: "#635BFF" }}>
+                <div className="rounded-full text-xs font-semibold px-3 py-1" style={{ background: "rgba(99,91,255,0.08)", color: "#2563EB" }}>
                   Fiken synkronisert ✓
                 </div>
               </div>
@@ -190,10 +190,10 @@ const HeroSection = () => {
                 className="mt-4 rounded-xl px-4 py-3 flex items-center gap-2.5"
                 style={{ background: "rgba(99,91,255,0.06)", border: "1px solid rgba(99,91,255,0.12)" }}
               >
-                <div className="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "#635BFF" }}>
+                <div className="w-6 h-6 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "#2563EB" }}>
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                 </div>
-                <p className="text-xs font-medium" style={{ color: "#635BFF" }}>
+                <p className="text-xs font-medium" style={{ color: "#2563EB" }}>
                   5 bilag behandlet og klart for godkjenning i Fiken
                 </p>
               </div>

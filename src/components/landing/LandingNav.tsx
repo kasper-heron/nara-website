@@ -72,9 +72,9 @@ const LandingNav = () => {
           <button
             onClick={() => scrollTo("signup")}
             className="text-sm font-semibold text-white rounded-lg transition-colors"
-            style={{ padding: "9px 20px", background: "#635BFF" }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "#5144e0")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "#635BFF")}
+            style={{ padding: "9px 20px", background: "#2563EB" }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "#1d4ed8")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "#2563EB")}
           >
             Kom i gang
           </button>
@@ -96,7 +96,7 @@ const LandingNav = () => {
               </button>
             ))}
             <a href={APP_URL} className="text-base font-medium" style={{ color: "#0a2540" }}>Logg inn</a>
-            <button onClick={() => scrollTo("signup")} className="text-white font-semibold rounded-lg py-3 text-sm mt-2" style={{ background: "#635BFF" }}>
+            <button onClick={() => scrollTo("signup")} className="text-white font-semibold rounded-lg py-3 text-sm mt-2" style={{ background: "#2563EB" }}>
               Kom i gang
             </button>
           </div>

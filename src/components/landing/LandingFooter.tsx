@@ -5,11 +5,7 @@ const scrollTo = (id: string) => {
 };
 
 const NaraLogo = () => (
-  <svg width="24" height="28" viewBox="0 0 28 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <line x1="3" y1="2" x2="3" y2="30" stroke="#0a2540" strokeWidth="4" strokeLinecap="round"/>
-    <line x1="3" y1="2" x2="25" y2="30" stroke="#0a2540" strokeWidth="4" strokeLinecap="round"/>
-    <line x1="25" y1="2" x2="25" y2="30" stroke="#0a2540" strokeWidth="4" strokeLinecap="round"/>
-  </svg>
+  <img src="/nara-logo.svg" alt="N" width={24} height={28} style={{ display: "block" }} />
 );
 
 const LandingFooter = () => (

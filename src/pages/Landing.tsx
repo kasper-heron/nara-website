@@ -21,7 +21,6 @@ import LandingFooter from "@/components/landing/LandingFooter";
 const Landing = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <AnnouncementStrip />
       <LandingNav />
       <HeroSection />
       <NaraDoesAllSection />

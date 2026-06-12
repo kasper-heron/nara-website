@@ -14,55 +14,18 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-white" style={{ paddingTop: 64, minHeight: "100vh" }}>
+    <section className="relative overflow-hidden bg-white flex items-center" style={{ paddingTop: 64, minHeight: "100vh" }}>
 
-      {/* Stripe-style colorful gradient — right side */}
+      {/* Blue gradient — right side only */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(ellipse 55% 80% at 95% 40%, rgba(99,91,255,0.25) 0%, transparent 60%),
-            radial-gradient(ellipse 40% 60% at 85% 10%, rgba(37,99,235,0.2) 0%, transparent 55%),
-            radial-gradient(ellipse 50% 70% at 100% 80%, rgba(139,92,246,0.15) 0%, transparent 60%),
-            radial-gradient(ellipse 30% 40% at 75% 60%, rgba(236,72,153,0.08) 0%, transparent 50%)
+            radial-gradient(ellipse 60% 90% at 100% 50%, rgba(37,99,235,0.13) 0%, transparent 65%),
+            radial-gradient(ellipse 40% 60% at 90% 0%, rgba(37,99,235,0.09) 0%, transparent 55%)
           `,
         }}
       />
-
-      {/* Animated flowing shape — like Stripe's gradient wave */}
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          right: "-5%",
-          top: "5%",
-          width: "55%",
-          height: "90%",
-          background: "linear-gradient(135deg, rgba(99,91,255,0.18) 0%, rgba(37,99,235,0.22) 30%, rgba(139,92,246,0.15) 60%, rgba(236,72,153,0.1) 100%)",
-          borderRadius: "40% 60% 50% 70% / 50% 40% 60% 50%",
-          filter: "blur(40px)",
-          animation: "float 8s ease-in-out infinite",
-        }}
-      />
-      <div
-        className="absolute pointer-events-none"
-        style={{
-          right: "5%",
-          top: "20%",
-          width: "40%",
-          height: "60%",
-          background: "linear-gradient(160deg, rgba(37,99,235,0.12) 0%, rgba(99,91,255,0.18) 50%, rgba(234,179,8,0.08) 100%)",
-          borderRadius: "60% 40% 70% 30% / 40% 60% 40% 60%",
-          filter: "blur(30px)",
-          animation: "float 6s ease-in-out infinite reverse",
-        }}
-      />
-
-      <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0) scale(1); }
-          50% { transform: translateY(-20px) scale(1.03); }
-        }
-      `}</style>
 
       <div className="relative max-w-[1160px] mx-auto w-full px-6 flex flex-col lg:flex-row items-center gap-12 py-24">
 

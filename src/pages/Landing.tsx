@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Inbox, ScanText, BookOpenCheck, RefreshCw, Coins, CopyX, Check } from "lucide-react";
+import { ArrowRight, Inbox, ScanText, BookOpenCheck, RefreshCw, Coins, CopyX, Check, FileText, Calculator, Bot } from "lucide-react";
 import SiteNav from "@/components/site/SiteNav";
 import SiteFooter from "@/components/site/SiteFooter";
 import Reveal from "@/components/site/Reveal";
@@ -70,13 +70,13 @@ const Hero = () => (
   </section>
 );
 
-/* ─────────────── «Hva skjer etter Gmail?» (mørk) ─────────────── */
+/* ─────────────── «Hva skjer etter e-post?» (mørk) ─────────────── */
 
 const STEPS = [
   {
     time: "09:42:07",
     title: "En faktura lander i innboksen",
-    body: "NARA overvåker e-posten din via offisiell Gmail-tilkobling – eller du videresender til firmanavn@bilag.naraflow.no. Ingenting å huske på.",
+    body: "NARA overvåker e-posten din via offisiell tilkobling til Gmail eller Outlook – eller du videresender til firmanavn@bilag.naraflow.no. Ingenting å huske på.",
     data: "Fra: faktura@telia.no · Vedlegg: 2026-04-1182.pdf",
   },
   {
@@ -109,7 +109,7 @@ const AfterGmail = () => (
       <Reveal delay={80}>
         <h2 className="display-lg text-balance" style={{ color: "var(--night-text)" }}>
           Hva skjer egentlig etter at du
-          <br className="hidden md:block" /> kobler til Gmail?
+          <br className="hidden md:block" /> kobler til e-post?
         </h2>
       </Reveal>
       <Reveal delay={160}>
@@ -168,8 +168,13 @@ const AfterGmail = () => (
 const FEATURES = [
   {
     icon: Inbox,
-    title: "Henter bilagene selv",
-    body: "Koble til Gmail med ett klikk, eller videresend til din egen @bilag.naraflow.no-adresse. Fakturaene fanges i det øyeblikket de ankommer.",
+    title: "Gmail og Outlook – begge støttet",
+    body: "Koble til Gmail eller Outlook med ett klikk, eller videresend til din egen @bilag.naraflow.no-adresse. Fakturaene fanges i det øyeblikket de ankommer.",
+  },
+  {
+    icon: FileText,
+    title: "EHF hentes automatisk",
+    body: "Ca. 50 % av norske B2B-fakturaer sendes som EHF (Peppol). NARA henter dem direkte fra Fiken – du trenger ikke løfte en finger. Obligatorisk fra 2027.",
   },
   {
     icon: ScanText,
@@ -177,9 +182,14 @@ const FEATURES = [
     body: "AI-en leser selve PDF-vedlegget og trekker ut leverandør, beløp, fakturanummer, forfall og valuta – ikke bare emnefeltet.",
   },
   {
+    icon: Calculator,
+    title: "MVA beregnet i sanntid",
+    body: "Riktig MVA-kode settes automatisk basert på leverandør og bilagstype. Ingen andre norske løsninger gjør dette i sanntid uten manuell input.",
+  },
+  {
     icon: BookOpenCheck,
     title: "Konterer som en regnskapsfører",
-    body: "Automatisk mapping til norsk standard kontoplan (NS 4102) med korrekte MVA-koder. Bygget for norske regler fra dag én.",
+    body: "Automatisk mapping til norsk standard kontoplan (NS 4102). Bygget for norske regler fra dag én – ikke et oversatt utenlandsk produkt.",
   },
   {
     icon: Coins,
@@ -190,6 +200,11 @@ const FEATURES = [
     icon: CopyX,
     title: "Aldri samme bilag to ganger",
     body: "Duplikatkontroll på tvers av e-post, videresending og EHF. Samme faktura prosesseres aldri dobbelt.",
+  },
+  {
+    icon: Bot,
+    title: "AI-agent som handler",
+    body: "Ikke bare svar på spørsmål – NARA kan utføre handlinger. Be den hente alle fakturaer fra en periode, og den gjør det. Historisk sync inkludert.",
   },
   {
     icon: RefreshCw,
@@ -244,6 +259,7 @@ const Features = () => (
 
 const CHAT_EXAMPLES = [
   "Vis alle fakturaer fra Visma i april",
+  "Hent alle fakturaer fra januar 2025",
   "Hvor mye brukte vi på programvare i Q1?",
   "Hvilke leverandører bruker vi mest penger på?",
 ];
@@ -332,7 +348,7 @@ const TRUST = [
   },
   {
     title: "Offisiell OAuth, aldri passord",
-    body: "Tilkoblingen til Gmail og Fiken skjer via offisielle API-er. NARA ser aldri passordene dine, og du kan trekke tilgangen når som helst.",
+    body: "Tilkoblingen til e-post og Fiken skjer via offisielle API-er. NARA ser aldri passordene dine, og du kan trekke tilgangen når som helst.",
   },
   {
     title: "Bygget for norske regler",
@@ -441,7 +457,7 @@ const FinalCTA = () => (
       </Reveal>
       <Reveal delay={100}>
         <p className="body-lg mt-5" style={{ color: "var(--night-soft)" }}>
-          Kom i gang på under fem minutter. Koble til Gmail og Fiken – så tar NARA det derfra.
+          Kom i gang på under fem minutter. Koble til e-post og Fiken – så tar NARA det derfra.
         </p>
       </Reveal>
       <Reveal delay={200}>

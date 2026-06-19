@@ -9,7 +9,7 @@ export const PLANS = [
     price: 399,
     features: [
       "Inntil 50 bilag per måned",
-      "Automatisk henting fra Gmail",
+      "Gmail og Outlook støttet",
       "AI-lesing av PDF-vedlegg",
       "Kontering etter NS 4102",
       "1 bruker",

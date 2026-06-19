@@ -24,7 +24,7 @@ export const PLANS = [
     price: 799,
     features: [
       "Ubegrenset antall bilag",
-      "To-veis sync med Fiken",
+      "To-veis sync med regnskapssystemet",
       "EHF-fakturaer inn automatisk",
       "AI-assistent – chat med regnskapet",
       "Duplikatkontroll og valutaomregning",

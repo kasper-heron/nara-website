@@ -109,7 +109,7 @@ const PipelineDemo = () => (
         <StageIcon icon={Check} done />
         <div className="flex-1 min-w-0">
           <p className="text-[13.5px] font-semibold" style={{ color: "var(--blue-deep)" }}>
-            Klar til godkjenning i Fiken
+            Klar til godkjenning i regnskapet
           </p>
           <p className="font-data text-[11.5px]" style={{ color: "var(--blue)" }}>
             Ett klikk – så er bilaget bokført

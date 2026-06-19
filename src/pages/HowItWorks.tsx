@@ -41,10 +41,10 @@ const STEPS = [
   {
     num: "05",
     icon: RefreshCw,
-    title: "Synkronisert med Fiken – begge veier",
-    body: "Godkjente bilag pushes inn i Fiken som kjøp, ferdig kontert. Samtidig henter NARA EHF-fakturaene dine fra Fiken, slik at alt samles på ett sted.",
-    data: "NARA ⇄ Fiken · EHF inn · kjøp ut",
-    detail: "Regnskapet i Fiken er alltid à jour – uten manuell punching.",
+    title: "Synkronisert med regnskapssystemet – begge veier",
+    body: "Godkjente bilag pushes inn i regnskapssystemet ditt som kjøp, ferdig kontert. Samtidig henter NARA EHF-fakturaene dine, slik at alt samles på ett sted.",
+    data: "NARA ⇄ Fiken / Tripletex / PowerOffice · EHF inn · kjøp ut",
+    detail: "Regnskapet er alltid à jour – uten manuell punching.",
   },
   {
     num: "06",
@@ -76,7 +76,7 @@ const HowItWorks = () => (
           </Reveal>
           <Reveal delay={160}>
             <p className="body-lg mt-6 max-w-[540px] mx-auto">
-              Fra en faktura lander i innboksen til den er bokført i Fiken, skjer nesten
+              Fra en faktura lander i innboksen til den er bokført i regnskapet, skjer nesten
               alt uten deg. Her er hele flyten – ærlig og i detalj.
             </p>
           </Reveal>

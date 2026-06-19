@@ -14,7 +14,7 @@ const COMPARISON: { feature: string; values: (boolean | string)[] }[] = [
   { feature: "Kontering etter NS 4102 + MVA-koder", values: [true, true, true] },
   { feature: "Valutaomregning til NOK (dagskurs)", values: [true, true, true] },
   { feature: "Duplikatkontroll", values: [false, true, true] },
-  { feature: "To-veis sync med Fiken", values: [false, true, true] },
+  { feature: "To-veis sync med regnskapssystemet", values: [false, true, true] },
   { feature: "EHF-fakturaer inn automatisk", values: [false, true, true] },
   { feature: "AI-assistent (chat med regnskapet)", values: [false, true, true] },
   { feature: "Brukere", values: ["1", "3", "Ubegrenset"] },
@@ -41,12 +41,12 @@ const FAQ = [
     a: "Bilag utover 50 i en måned legges i kø og prosesseres ikke før neste måned – eller du oppgraderer til Vekst, som har ubegrenset volum.",
   },
   {
-    q: "Trenger jeg Fiken for å bruke NARA?",
-    a: "Nei. NARA fungerer som selvstendig bilagsinnboks med AI-lesing og kontering. Men med Fiken tilkoblet får du hele verdien: godkjente bilag bokføres automatisk som kjøp.",
+    q: "Trenger jeg et regnskapssystem for å bruke NARA?",
+    a: "Nei. NARA fungerer som selvstendig bilagsinnboks med AI-lesing og kontering. Men med et regnskapssystem tilkoblet (Fiken, Tripletex eller PowerOffice) får du hele verdien: godkjente bilag bokføres automatisk.",
   },
   {
     q: "Hvordan behandles dataene mine?",
-    a: "Tilgang til Gmail og Fiken skjer via offisielle API-er med OAuth – NARA ser aldri passordene dine, og du kan trekke tilgangen når som helst. Les mer i personvernerklæringen.",
+    a: "Tilgang til e-post og regnskapssystemet skjer via offisielle API-er med OAuth – NARA ser aldri passordene dine, og du kan trekke tilgangen når som helst. Les mer i personvernerklæringen.",
   },
 ];
 

@@ -36,7 +36,7 @@ const Hero = () => (
         <Reveal delay={160}>
           <p className="body-lg mt-6 max-w-[460px]">
             NARA henter fakturaene fra innboksen, leser dem, konterer etter norsk
-            kontoplan og legger dem klare i Fiken. Du godkjenner. Det er alt.
+            kontoplan og legger dem klare i regnskapssystemet ditt. Du godkjenner. Det er alt.
           </p>
         </Reveal>
         <Reveal delay={240}>
@@ -93,8 +93,8 @@ const STEPS = [
   },
   {
     time: "09:43:12",
-    title: "Klar til godkjenning i Fiken",
-    body: "Bilaget ligger ferdig behandlet i dashbordet ditt. Ett klikk – og det er bokført som kjøp i Fiken. Du har alltid siste ord.",
+    title: "Klar til godkjenning i regnskapet",
+    body: "Bilaget ligger ferdig behandlet i dashbordet ditt. Ett klikk – og det er bokført som kjøp i regnskapssystemet ditt. Du har alltid siste ord.",
     data: "Status: klar · venter på din godkjenning",
   },
 ];
@@ -104,7 +104,7 @@ const AfterGmail = () => (
     <div className="absolute inset-0 night-glow pointer-events-none" aria-hidden="true" />
     <div className="relative max-w-[860px] mx-auto">
       <Reveal>
-        <p className="eyebrow mb-5">Fra innboks til Fiken</p>
+        <p className="eyebrow mb-5">Fra innboks til regnskapet</p>
       </Reveal>
       <Reveal delay={80}>
         <h2 className="display-lg text-balance" style={{ color: "var(--night-text)" }}>
@@ -155,7 +155,7 @@ const AfterGmail = () => (
 
       <Reveal delay={120}>
         <p className="mt-14 text-[17px] font-medium" style={{ color: "var(--night-text)" }}>
-          Fra innboks til Fiken på under ett minutt.{" "}
+          Fra innboks til regnskapet på under ett minutt.{" "}
           <span style={{ color: "var(--night-mute)" }}>Uten at du gjorde noe.</span>
         </p>
       </Reveal>
@@ -174,7 +174,7 @@ const FEATURES = [
   {
     icon: FileText,
     title: "EHF hentes automatisk",
-    body: "Ca. 50 % av norske B2B-fakturaer sendes som EHF (Peppol). NARA henter dem direkte fra Fiken – du trenger ikke løfte en finger. Obligatorisk fra 2027.",
+    body: "Ca. 50 % av norske B2B-fakturaer sendes som EHF (Peppol). NARA henter dem direkte fra regnskapssystemet ditt – du trenger ikke løfte en finger. Obligatorisk fra 2027.",
   },
   {
     icon: ScanText,
@@ -208,8 +208,8 @@ const FEATURES = [
   },
   {
     icon: RefreshCw,
-    title: "To-veis sync med Fiken",
-    body: "EHF-fakturaer hentes inn automatisk, og godkjente bilag pushes rett inn i Fiken som kjøp. Regnskapet ditt er alltid à jour.",
+    title: "To-veis sync med regnskapssystemet",
+    body: "EHF-fakturaer hentes inn automatisk, og godkjente bilag pushes rett inn i regnskapssystemet ditt som kjøp. Støtter Fiken, Tripletex og PowerOffice.",
   },
 ];
 
@@ -348,7 +348,7 @@ const TRUST = [
   },
   {
     title: "Offisiell OAuth, aldri passord",
-    body: "Tilkoblingen til e-post og Fiken skjer via offisielle API-er. NARA ser aldri passordene dine, og du kan trekke tilgangen når som helst.",
+    body: "Tilkoblingen til e-post og regnskapssystemet skjer via offisielle API-er. NARA ser aldri passordene dine, og du kan trekke tilgangen når som helst.",
   },
   {
     title: "Bygget for norske regler",
@@ -457,7 +457,7 @@ const FinalCTA = () => (
       </Reveal>
       <Reveal delay={100}>
         <p className="body-lg mt-5" style={{ color: "var(--night-soft)" }}>
-          Kom i gang på under fem minutter. Koble til e-post og Fiken – så tar NARA det derfra.
+          Kom i gang på under fem minutter. Koble til e-post og regnskapssystemet ditt – så tar NARA det derfra.
         </p>
       </Reveal>
       <Reveal delay={200}>

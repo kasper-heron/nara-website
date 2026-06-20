@@ -31,22 +31,22 @@ const HeroBlob = () => (
       .nara-blob3 { animation: blob3 20s ease-in-out infinite; }
     `}</style>
     <div className="nara-blob1" style={{
-      position: "absolute", right: "-5%", top: "-10%",
-      width: "55%", height: "80%",
-      background: "radial-gradient(ellipse at 60% 40%, rgba(37,99,235,0.18) 0%, rgba(37,99,235,0.06) 50%, transparent 70%)",
-      filter: "blur(40px)",
+      position: "absolute", right: "-10%", top: "-20%",
+      width: "70%", height: "100%",
+      background: "radial-gradient(ellipse at 55% 45%, rgba(37,99,235,0.55) 0%, rgba(37,99,235,0.2) 45%, transparent 70%)",
+      filter: "blur(60px)",
     }} />
     <div className="nara-blob2" style={{
-      position: "absolute", right: "5%", top: "20%",
-      width: "45%", height: "70%",
-      background: "radial-gradient(ellipse at 40% 50%, rgba(10,37,64,0.13) 0%, rgba(37,99,235,0.08) 45%, transparent 70%)",
-      filter: "blur(50px)",
+      position: "absolute", right: "0%", top: "10%",
+      width: "55%", height: "80%",
+      background: "radial-gradient(ellipse at 40% 50%, rgba(10,37,64,0.45) 0%, rgba(37,99,235,0.25) 45%, transparent 70%)",
+      filter: "blur(70px)",
     }} />
     <div className="nara-blob3" style={{
-      position: "absolute", right: "15%", bottom: "-5%",
-      width: "35%", height: "50%",
-      background: "radial-gradient(ellipse at 50% 30%, rgba(96,165,250,0.14) 0%, transparent 65%)",
-      filter: "blur(35px)",
+      position: "absolute", right: "10%", bottom: "-10%",
+      width: "50%", height: "60%",
+      background: "radial-gradient(ellipse at 50% 30%, rgba(96,165,250,0.45) 0%, rgba(37,99,235,0.15) 55%, transparent 75%)",
+      filter: "blur(50px)",
     }} />
     <div style={{
       position: "absolute", inset: 0,

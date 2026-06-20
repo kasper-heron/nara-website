@@ -10,12 +10,14 @@ import { useState, useRef, useEffect } from "react";
 /* ────────────────────────── Hero ────────────────────────── */
 
 const RIBBONS = [
-  { color: [191, 219, 254], alpha: 0.90, width: 110, speed: 0.20, offset: 0.0 },
-  { color: [147, 197, 253], alpha: 0.85, width: 90,  speed: 0.16, offset: 1.2 },
-  { color: [59,  130, 246], alpha: 0.80, width: 75,  speed: 0.24, offset: 2.5 },
-  { color: [37,  99,  235], alpha: 0.75, width: 60,  speed: 0.18, offset: 3.8 },
-  { color: [29,  78,  216], alpha: 0.70, width: 50,  speed: 0.14, offset: 5.0 },
-  { color: [10,  37,  64],  alpha: 0.65, width: 40,  speed: 0.22, offset: 6.2 },
+  { color: [219, 234, 254], speed: 0.12, angleOffset: -0.35, spread: 0.10 },
+  { color: [191, 219, 254], speed: 0.10, angleOffset: -0.20, spread: 0.09 },
+  { color: [147, 197, 253], speed: 0.09, angleOffset: -0.05, spread: 0.08 },
+  { color: [96,  165, 250], speed: 0.11, angleOffset:  0.10, spread: 0.08 },
+  { color: [59,  130, 246], speed: 0.08, angleOffset:  0.25, spread: 0.07 },
+  { color: [37,   99, 235], speed: 0.10, angleOffset:  0.40, spread: 0.07 },
+  { color: [29,   78, 216], speed: 0.09, angleOffset:  0.55, spread: 0.06 },
+  { color: [10,   37,  64], speed: 0.07, angleOffset:  0.70, spread: 0.06 },
 ]
 
 function drawRibbon(
@@ -23,33 +25,42 @@ function drawRibbon(
   t: number,
   W: number,
   H: number,
-  { color, alpha, width, speed, offset }: typeof RIBBONS[0]
+  { color, speed, angleOffset, spread }: typeof RIBBONS[0],
+  idx: number
 ) {
-  const s = (v: number) => Math.sin(t * speed + offset + v)
-  const c = (v: number) => Math.cos(t * speed + offset + v)
+  // Alle bånd starter fra samme punkt øverst til høyre (vifte-effekt)
+  const ox = W * 1.05
+  const oy = H * -0.05
 
-  // Start fra øvre høyre, flyt ned til nedre høyre — hold deg i høyre 45%
-  const ax  = W * 0.72 + s(0.0) * 30,  ay  = H * -0.1
-  const bx  = W * 0.62 + c(0.5) * 35,  by  = H * 0.28 + s(0.8) * 25
-  const cx2 = W * 0.58 + s(1.1) * 30,  cy2 = H * 0.62 + c(0.6) * 30
-  const dx  = W * 0.68 + c(0.3) * 25,  dy  = H * 1.05
+  // Sakte svingende vinkel per bånd
+  const baseAngle = Math.PI * 0.52 + angleOffset
+  const sway = Math.sin(t * speed + idx * 0.8) * 0.06
+  const angle = baseAngle + sway
 
-  const nx1 = -(by - ay), ny1 = bx - ax
-  const len1 = Math.hypot(nx1, ny1) || 1
-  const ox1 = (nx1 / len1) * (width / 2), oy1 = (ny1 / len1) * (width / 2)
+  // Lengde og bredde
+  const len = Math.hypot(W, H) * 1.1
+  const hw = W * spread
 
-  const nx2 = -(dy - cy2), ny2 = dx - cx2
-  const len2 = Math.hypot(nx2, ny2) || 1
-  const ox2 = (nx2 / len2) * (width / 2), oy2 = (ny2 / len2) * (width / 2)
+  // Endepunkt langs vinkelen
+  const ex = ox + Math.cos(angle) * len
+  const ey = oy + Math.sin(angle) * len
+
+  // Kontrollpunkt — lett kurve
+  const curve = Math.sin(t * speed * 0.7 + idx) * 0.08
+  const cx = ox + Math.cos(angle + curve) * len * 0.5
+  const cy = oy + Math.sin(angle + curve) * len * 0.5
+
+  // Perpendikulær for båndtykkelse
+  const px = -Math.sin(angle), py = Math.cos(angle)
 
   const [r, g, b] = color
   ctx.beginPath()
-  ctx.moveTo(ax - ox1, ay - oy1)
-  ctx.bezierCurveTo(bx - ox1, by - oy1, cx2 - ox2, cy2 - oy2, dx - ox2, dy - oy2)
-  ctx.lineTo(dx + ox2, dy + oy2)
-  ctx.bezierCurveTo(cx2 + ox2, cy2 + oy2, bx + ox1, by + oy1, ax + ox1, ay + oy1)
+  ctx.moveTo(ox + px * hw, oy + py * hw)
+  ctx.quadraticCurveTo(cx + px * hw, cy + py * hw, ex + px * hw, ey + py * hw)
+  ctx.lineTo(ex - px * hw, ey - py * hw)
+  ctx.quadraticCurveTo(cx - px * hw, cy - py * hw, ox - px * hw, oy - py * hw)
   ctx.closePath()
-  ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`
+  ctx.fillStyle = `rgba(${r},${g},${b},0.75)`
   ctx.fill()
 }
 
@@ -75,7 +86,7 @@ const HeroBlob = () => {
       const W = canvas.offsetWidth
       const H = canvas.offsetHeight
       ctx.clearRect(0, 0, W, H)
-      for (const r of RIBBONS) drawRibbon(ctx, t, W, H, r)
+      RIBBONS.forEach((r, i) => drawRibbon(ctx, t, W, H, r, i))
       t += 0.012
       raf = requestAnimationFrame(frame)
     }

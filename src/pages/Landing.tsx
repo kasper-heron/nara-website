@@ -12,45 +12,48 @@ import { useState } from "react";
 const HeroBlob = () => (
   <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
     <style>{`
-      @keyframes blob1 {
-        0%,100% { transform: translate(0%,0%) scale(1); }
-        33%      { transform: translate(4%,-6%) scale(1.08); }
-        66%      { transform: translate(-3%,4%) scale(0.95); }
+      @keyframes ribbon1 {
+        0%,100% { d: path("M 900 -100 C 700 0, 750 150, 650 300 C 550 450, 500 500, 600 650 C 700 800, 850 750, 950 900 L 1400 900 L 1400 -100 Z"); }
+        50%      { d: path("M 900 -100 C 750 50, 700 200, 620 350 C 540 500, 480 520, 580 700 C 680 880, 870 800, 950 900 L 1400 900 L 1400 -100 Z"); }
       }
-      @keyframes blob2 {
-        0%,100% { transform: translate(0%,0%) scale(1); }
-        33%      { transform: translate(-5%,5%) scale(1.05); }
-        66%      { transform: translate(4%,-3%) scale(0.97); }
+      @keyframes ribbon2 {
+        0%,100% { d: path("M 980 -100 C 800 80, 820 200, 720 370 C 620 540, 580 560, 660 720 C 740 880, 900 820, 1000 900 L 1400 900 L 1400 -100 Z"); }
+        50%      { d: path("M 980 -100 C 830 30, 780 180, 700 340 C 620 500, 560 580, 680 730 C 800 880, 920 810, 1000 900 L 1400 900 L 1400 -100 Z"); }
       }
-      @keyframes blob3 {
-        0%,100% { transform: translate(0%,0%) scale(1); }
-        50%      { transform: translate(3%,4%) scale(1.1); }
+      @keyframes ribbon3 {
+        0%,100% { d: path("M 1060 -100 C 900 60, 880 220, 800 380 C 720 540, 680 600, 760 760 C 840 920, 980 860, 1060 900 L 1400 900 L 1400 -100 Z"); }
+        50%      { d: path("M 1060 -100 C 920 40, 860 240, 820 400 C 780 560, 700 620, 800 780 C 900 940, 1000 860, 1060 900 L 1400 900 L 1400 -100 Z"); }
       }
-      .nara-blob1 { animation: blob1 12s ease-in-out infinite; }
-      .nara-blob2 { animation: blob2 16s ease-in-out infinite; }
-      .nara-blob3 { animation: blob3 20s ease-in-out infinite; }
+      .r1 { animation: ribbon1 14s ease-in-out infinite; }
+      .r2 { animation: ribbon2 18s ease-in-out infinite; }
+      .r3 { animation: ribbon3 22s ease-in-out infinite; }
     `}</style>
-    <div className="nara-blob1" style={{
-      position: "absolute", right: "-10%", top: "-20%",
-      width: "70%", height: "100%",
-      background: "radial-gradient(ellipse at 55% 45%, rgba(37,99,235,0.55) 0%, rgba(37,99,235,0.2) 45%, transparent 70%)",
-      filter: "blur(60px)",
-    }} />
-    <div className="nara-blob2" style={{
-      position: "absolute", right: "0%", top: "10%",
-      width: "55%", height: "80%",
-      background: "radial-gradient(ellipse at 40% 50%, rgba(10,37,64,0.45) 0%, rgba(37,99,235,0.25) 45%, transparent 70%)",
-      filter: "blur(70px)",
-    }} />
-    <div className="nara-blob3" style={{
-      position: "absolute", right: "10%", bottom: "-10%",
-      width: "50%", height: "60%",
-      background: "radial-gradient(ellipse at 50% 30%, rgba(96,165,250,0.45) 0%, rgba(37,99,235,0.15) 55%, transparent 75%)",
-      filter: "blur(50px)",
-    }} />
+    <svg
+      viewBox="0 0 1400 700"
+      preserveAspectRatio="xMidYMid slice"
+      style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+    >
+      <defs>
+        <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#93c5fd" stopOpacity="0.7" />
+          <stop offset="100%" stopColor="#2563eb" stopOpacity="0.5" />
+        </linearGradient>
+        <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#2563eb" stopOpacity="0.6" />
+          <stop offset="100%" stopColor="#0a2540" stopOpacity="0.5" />
+        </linearGradient>
+        <linearGradient id="g3" x1="0%" y1="100%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#bfdbfe" stopOpacity="0.5" />
+          <stop offset="100%" stopColor="#1d4ed8" stopOpacity="0.4" />
+        </linearGradient>
+      </defs>
+      <path className="r1" fill="url(#g1)" d="M 900 -100 C 700 0, 750 150, 650 300 C 550 450, 500 500, 600 650 C 700 800, 850 750, 950 900 L 1400 900 L 1400 -100 Z" />
+      <path className="r2" fill="url(#g2)" d="M 980 -100 C 800 80, 820 200, 720 370 C 620 540, 580 560, 660 720 C 740 880, 900 820, 1000 900 L 1400 900 L 1400 -100 Z" />
+      <path className="r3" fill="url(#g3)" d="M 1060 -100 C 900 60, 880 220, 800 380 C 720 540, 680 600, 760 760 C 840 920, 980 860, 1060 900 L 1400 900 L 1400 -100 Z" />
+    </svg>
     <div style={{
       position: "absolute", inset: 0,
-      background: "linear-gradient(to bottom, transparent 70%, white 100%)",
+      background: "linear-gradient(to right, white 35%, transparent 65%), linear-gradient(to bottom, transparent 75%, white 100%)",
     }} />
   </div>
 )

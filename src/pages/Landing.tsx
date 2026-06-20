@@ -9,18 +9,55 @@ import { useState } from "react";
 
 /* ────────────────────────── Hero ────────────────────────── */
 
-const Hero = () => (
-  <section className="relative overflow-hidden" style={{ paddingTop: 64 }}>
-    <div className="absolute inset-0 grid-paper pointer-events-none" aria-hidden="true" />
-    <div
-      className="absolute inset-0 pointer-events-none"
-      aria-hidden="true"
-      style={{
-        background:
-          "radial-gradient(ellipse 50% 60% at 85% 20%, rgba(37,99,235,0.07) 0%, transparent 60%), linear-gradient(to bottom, transparent 60%, var(--paper) 100%)",
-      }}
-    />
+const HeroBlob = () => (
+  <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+    <style>{`
+      @keyframes blob1 {
+        0%,100% { transform: translate(0%,0%) scale(1); }
+        33%      { transform: translate(4%,-6%) scale(1.08); }
+        66%      { transform: translate(-3%,4%) scale(0.95); }
+      }
+      @keyframes blob2 {
+        0%,100% { transform: translate(0%,0%) scale(1); }
+        33%      { transform: translate(-5%,5%) scale(1.05); }
+        66%      { transform: translate(4%,-3%) scale(0.97); }
+      }
+      @keyframes blob3 {
+        0%,100% { transform: translate(0%,0%) scale(1); }
+        50%      { transform: translate(3%,4%) scale(1.1); }
+      }
+      .nara-blob1 { animation: blob1 12s ease-in-out infinite; }
+      .nara-blob2 { animation: blob2 16s ease-in-out infinite; }
+      .nara-blob3 { animation: blob3 20s ease-in-out infinite; }
+    `}</style>
+    <div className="nara-blob1" style={{
+      position: "absolute", right: "-5%", top: "-10%",
+      width: "55%", height: "80%",
+      background: "radial-gradient(ellipse at 60% 40%, rgba(37,99,235,0.18) 0%, rgba(37,99,235,0.06) 50%, transparent 70%)",
+      filter: "blur(40px)",
+    }} />
+    <div className="nara-blob2" style={{
+      position: "absolute", right: "5%", top: "20%",
+      width: "45%", height: "70%",
+      background: "radial-gradient(ellipse at 40% 50%, rgba(10,37,64,0.13) 0%, rgba(37,99,235,0.08) 45%, transparent 70%)",
+      filter: "blur(50px)",
+    }} />
+    <div className="nara-blob3" style={{
+      position: "absolute", right: "15%", bottom: "-5%",
+      width: "35%", height: "50%",
+      background: "radial-gradient(ellipse at 50% 30%, rgba(96,165,250,0.14) 0%, transparent 65%)",
+      filter: "blur(35px)",
+    }} />
+    <div style={{
+      position: "absolute", inset: 0,
+      background: "linear-gradient(to bottom, transparent 70%, white 100%)",
+    }} />
+  </div>
+)
 
+const Hero = () => (
+  <section className="relative overflow-hidden" style={{ paddingTop: 64, background: "#fff" }}>
+    <HeroBlob />
     <div className="relative max-w-[1180px] mx-auto px-5 md:px-6 pt-16 md:pt-24 pb-16 md:pb-24 flex flex-col lg:flex-row items-center gap-14">
       <div className="lg:w-[50%]">
         <Reveal>

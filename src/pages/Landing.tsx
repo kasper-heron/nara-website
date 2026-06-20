@@ -5,58 +5,101 @@ import SiteFooter from "@/components/site/SiteFooter";
 import Reveal from "@/components/site/Reveal";
 import PipelineDemo from "@/components/site/PipelineDemo";
 import PlanCards from "@/components/site/PlanCards";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 /* ────────────────────────── Hero ────────────────────────── */
 
-const HeroBlob = () => (
-  <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-    <style>{`
-      @keyframes ribbon1 {
-        0%,100% { d: path("M 900 -100 C 700 0, 750 150, 650 300 C 550 450, 500 500, 600 650 C 700 800, 850 750, 950 900 L 1400 900 L 1400 -100 Z"); }
-        50%      { d: path("M 900 -100 C 750 50, 700 200, 620 350 C 540 500, 480 520, 580 700 C 680 880, 870 800, 950 900 L 1400 900 L 1400 -100 Z"); }
-      }
-      @keyframes ribbon2 {
-        0%,100% { d: path("M 980 -100 C 800 80, 820 200, 720 370 C 620 540, 580 560, 660 720 C 740 880, 900 820, 1000 900 L 1400 900 L 1400 -100 Z"); }
-        50%      { d: path("M 980 -100 C 830 30, 780 180, 700 340 C 620 500, 560 580, 680 730 C 800 880, 920 810, 1000 900 L 1400 900 L 1400 -100 Z"); }
-      }
-      @keyframes ribbon3 {
-        0%,100% { d: path("M 1060 -100 C 900 60, 880 220, 800 380 C 720 540, 680 600, 760 760 C 840 920, 980 860, 1060 900 L 1400 900 L 1400 -100 Z"); }
-        50%      { d: path("M 1060 -100 C 920 40, 860 240, 820 400 C 780 560, 700 620, 800 780 C 900 940, 1000 860, 1060 900 L 1400 900 L 1400 -100 Z"); }
-      }
-      .r1 { animation: ribbon1 14s ease-in-out infinite; }
-      .r2 { animation: ribbon2 18s ease-in-out infinite; }
-      .r3 { animation: ribbon3 22s ease-in-out infinite; }
-    `}</style>
-    <svg
-      viewBox="0 0 1400 700"
-      preserveAspectRatio="xMidYMid slice"
-      style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
-    >
-      <defs>
-        <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#93c5fd" stopOpacity="0.7" />
-          <stop offset="100%" stopColor="#2563eb" stopOpacity="0.5" />
-        </linearGradient>
-        <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#2563eb" stopOpacity="0.6" />
-          <stop offset="100%" stopColor="#0a2540" stopOpacity="0.5" />
-        </linearGradient>
-        <linearGradient id="g3" x1="0%" y1="100%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#bfdbfe" stopOpacity="0.5" />
-          <stop offset="100%" stopColor="#1d4ed8" stopOpacity="0.4" />
-        </linearGradient>
-      </defs>
-      <path className="r1" fill="url(#g1)" d="M 900 -100 C 700 0, 750 150, 650 300 C 550 450, 500 500, 600 650 C 700 800, 850 750, 950 900 L 1400 900 L 1400 -100 Z" />
-      <path className="r2" fill="url(#g2)" d="M 980 -100 C 800 80, 820 200, 720 370 C 620 540, 580 560, 660 720 C 740 880, 900 820, 1000 900 L 1400 900 L 1400 -100 Z" />
-      <path className="r3" fill="url(#g3)" d="M 1060 -100 C 900 60, 880 220, 800 380 C 720 540, 680 600, 760 760 C 840 920, 980 860, 1060 900 L 1400 900 L 1400 -100 Z" />
-    </svg>
-    <div style={{
-      position: "absolute", inset: 0,
-      background: "linear-gradient(to right, white 35%, transparent 65%), linear-gradient(to bottom, transparent 75%, white 100%)",
-    }} />
-  </div>
-)
+const RIBBONS = [
+  { color: [147, 197, 253], alpha: 0.82, width: 220, speed: 0.28, offset: 0.0 },
+  { color: [37,  99,  235], alpha: 0.72, width: 190, speed: 0.22, offset: 1.8 },
+  { color: [10,  37,  64],  alpha: 0.65, width: 160, speed: 0.18, offset: 3.4 },
+  { color: [96, 165, 250],  alpha: 0.55, width: 130, speed: 0.32, offset: 5.1 },
+  { color: [191,219,254],   alpha: 0.50, width: 100, speed: 0.15, offset: 2.6 },
+]
+
+function drawRibbon(
+  ctx: CanvasRenderingContext2D,
+  t: number,
+  W: number,
+  H: number,
+  { color, alpha, width, speed, offset }: typeof RIBBONS[0]
+) {
+  const s = (v: number) => Math.sin(t * speed + offset + v)
+  const c = (v: number) => Math.cos(t * speed + offset + v)
+
+  // Spine of the ribbon — four bezier control points
+  const ax = W * 0.82 + s(0.0) * 90,   ay = H * -0.05
+  const bx = W * 0.55 + c(0.7) * 100,  by = H * 0.32 + s(1.1) * 55
+  const cx2 = W * 0.38 + s(1.4) * 80,  cy2 = H * 0.62 + c(0.9) * 60
+  const dx = W * 0.60 + c(0.3) * 70,   dy = H * 1.05
+
+  // Perpendicular offset for ribbon thickness
+  const nx1 = -(by - ay), ny1 = bx - ax
+  const len1 = Math.hypot(nx1, ny1) || 1
+  const ox1 = (nx1 / len1) * (width / 2), oy1 = (ny1 / len1) * (width / 2)
+
+  const nx2 = -(dy - cy2), ny2 = dx - cx2
+  const len2 = Math.hypot(nx2, ny2) || 1
+  const ox2 = (nx2 / len2) * (width / 2), oy2 = (ny2 / len2) * (width / 2)
+
+  const [r, g, b] = color
+  ctx.beginPath()
+  ctx.moveTo(ax - ox1, ay - oy1)
+  ctx.bezierCurveTo(bx - ox1, by - oy1, cx2 - ox2, cy2 - oy2, dx - ox2, dy - oy2)
+  ctx.lineTo(dx + ox2, dy + oy2)
+  ctx.bezierCurveTo(cx2 + ox2, cy2 + oy2, bx + ox1, by + oy1, ax + ox1, ay + oy1)
+  ctx.closePath()
+  ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`
+  ctx.fill()
+}
+
+const HeroBlob = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext("2d")!
+    let raf: number
+    let t = 0
+
+    const resize = () => {
+      canvas.width  = canvas.offsetWidth  * window.devicePixelRatio
+      canvas.height = canvas.offsetHeight * window.devicePixelRatio
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
+    }
+    resize()
+    window.addEventListener("resize", resize)
+
+    const frame = () => {
+      const W = canvas.offsetWidth
+      const H = canvas.offsetHeight
+      ctx.clearRect(0, 0, W, H)
+      for (const r of RIBBONS) drawRibbon(ctx, t, W, H, r)
+      t += 0.012
+      raf = requestAnimationFrame(frame)
+    }
+    frame()
+
+    return () => {
+      cancelAnimationFrame(raf)
+      window.removeEventListener("resize", resize)
+    }
+  }, [])
+
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+      <canvas
+        ref={canvasRef}
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+      />
+      <div style={{
+        position: "absolute", inset: 0,
+        background: "linear-gradient(to right, white 30%, transparent 60%), linear-gradient(to bottom, transparent 80%, white 100%)",
+      }} />
+    </div>
+  )
+}
 
 const Hero = () => (
   <section className="relative overflow-hidden" style={{ paddingTop: 64, background: "#fff" }}>

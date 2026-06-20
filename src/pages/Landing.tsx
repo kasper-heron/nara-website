@@ -9,16 +9,13 @@ import { useState, useRef, useEffect } from "react";
 
 /* ────────────────────────── Hero ────────────────────────── */
 
-// Lyse blåtoner kun — ingen navy
+// Brede flytende bånd med gradient-fyll — myk silke som Stripe.
+// Tre lyse blåtoner som overlapper og lyser sammen via "screen"-blanding.
 const RIBBONS = [
-  { color: [224, 242, 255], alpha: 0.95, spread: 0.055, speed: 0.09, angleOffset: -0.42 },
-  { color: [186, 224, 255], alpha: 0.90, spread: 0.048, speed: 0.07, angleOffset: -0.26 },
-  { color: [147, 197, 253], alpha: 0.88, spread: 0.042, speed: 0.11, angleOffset: -0.10 },
-  { color: [96,  165, 250], alpha: 0.85, spread: 0.038, speed: 0.08, angleOffset:  0.06 },
-  { color: [59,  130, 246], alpha: 0.82, spread: 0.034, speed: 0.10, angleOffset:  0.22 },
-  { color: [37,   99, 235], alpha: 0.78, spread: 0.030, speed: 0.07, angleOffset:  0.38 },
-  { color: [99,  179, 255], alpha: 0.72, spread: 0.026, speed: 0.12, angleOffset:  0.54 },
-  { color: [147, 210, 255], alpha: 0.65, spread: 0.022, speed: 0.08, angleOffset:  0.70 },
+  { from: [191, 219, 254], to: [37, 99, 235],  spread: 0.30, speed: 0.085, phase: 0.0 },
+  { from: [147, 197, 253], to: [29, 78, 216],  spread: 0.26, speed: 0.062, phase: 2.1 },
+  { from: [224, 242, 255], to: [59, 130, 246], spread: 0.22, speed: 0.10,  phase: 4.3 },
+  { from: [165, 210, 255], to: [96, 165, 250], spread: 0.18, speed: 0.073, phase: 5.7 },
 ]
 
 function drawRibbon(
@@ -26,38 +23,36 @@ function drawRibbon(
   t: number,
   W: number,
   H: number,
-  { color, alpha, spread, speed, angleOffset }: typeof RIBBONS[0],
-  idx: number
+  { from, to, spread, speed, phase }: typeof RIBBONS[0]
 ) {
-  // Alle starter fra øvre høyre hjørne
-  const ox = W * 1.08, oy = H * -0.08
+  // Diagonalt sveip fra øvre høyre ned mot nedre midt/høyre
+  const ox = W * (0.95 + Math.sin(t * speed + phase) * 0.06)
+  const oy = H * -0.15
+  const ex = W * (0.62 + Math.sin(t * speed * 0.8 + phase + 1) * 0.10)
+  const ey = H * 1.15
 
-  // Vinkel svinger sakte og organisk
-  const baseAngle = Math.PI * 0.54 + angleOffset
-  const sway = Math.sin(t * speed + idx * 1.1) * 0.045
-  const angle = baseAngle + sway
+  // To kontrollpunkter som vandrer → organisk S-kurve
+  const c1x = W * (0.80 + Math.sin(t * speed * 1.1 + phase) * 0.12)
+  const c1y = H * (0.30 + Math.cos(t * speed * 0.9 + phase) * 0.08)
+  const c2x = W * (0.55 + Math.cos(t * speed * 0.7 + phase + 2) * 0.14)
+  const c2y = H * (0.68 + Math.sin(t * speed * 1.0 + phase + 1) * 0.08)
 
-  const len = Math.hypot(W, H) * 1.2
-  const hw  = W * spread
+  const hw = W * spread
 
-  // To kontrollpunkter for S-kurve (silk-effekt)
-  const c1x = ox + Math.cos(angle + Math.sin(t * speed * 0.6 + idx) * 0.07) * len * 0.38
-  const c1y = oy + Math.sin(angle + Math.sin(t * speed * 0.6 + idx) * 0.07) * len * 0.38
-  const c2x = ox + Math.cos(angle + Math.cos(t * speed * 0.5 + idx + 1) * 0.05) * len * 0.72
-  const c2y = oy + Math.sin(angle + Math.cos(t * speed * 0.5 + idx + 1) * 0.05) * len * 0.72
-  const ex  = ox + Math.cos(angle) * len
-  const ey  = oy + Math.sin(angle) * len
+  // Gradient langs båndet
+  const grad = ctx.createLinearGradient(ox, oy, ex, ey)
+  grad.addColorStop(0,   `rgba(${from[0]},${from[1]},${from[2]},0)`)
+  grad.addColorStop(0.4, `rgba(${from[0]},${from[1]},${from[2]},0.9)`)
+  grad.addColorStop(0.7, `rgba(${to[0]},${to[1]},${to[2]},0.85)`)
+  grad.addColorStop(1,   `rgba(${to[0]},${to[1]},${to[2]},0)`)
 
-  const px = -Math.sin(angle), py = Math.cos(angle)
-
-  const [r, g, b] = color
   ctx.beginPath()
-  ctx.moveTo(ox + px * hw, oy + py * hw)
-  ctx.bezierCurveTo(c1x + px * hw, c1y + py * hw, c2x + px * hw, c2y + py * hw, ex + px * hw, ey + py * hw)
-  ctx.lineTo(ex - px * hw, ey - py * hw)
-  ctx.bezierCurveTo(c2x - px * hw, c2y - py * hw, c1x - px * hw, c1y - py * hw, ox - px * hw, oy - py * hw)
+  ctx.moveTo(ox + hw, oy)
+  ctx.bezierCurveTo(c1x + hw, c1y, c2x + hw, c2y, ex + hw, ey)
+  ctx.lineTo(ex - hw, ey)
+  ctx.bezierCurveTo(c2x - hw, c2y, c1x - hw, c1y, ox - hw, oy)
   ctx.closePath()
-  ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`
+  ctx.fillStyle = grad
   ctx.fill()
 }
 
@@ -72,6 +67,7 @@ const HeroBlob = () => {
     let t = 0
 
     const resize = () => {
+      ctx.setTransform(1, 0, 0, 1, 0, 0)
       canvas.width  = canvas.offsetWidth  * window.devicePixelRatio
       canvas.height = canvas.offsetHeight * window.devicePixelRatio
       ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
@@ -83,8 +79,11 @@ const HeroBlob = () => {
       const W = canvas.offsetWidth
       const H = canvas.offsetHeight
       ctx.clearRect(0, 0, W, H)
-      RIBBONS.forEach((r, i) => drawRibbon(ctx, t, W, H, r, i))
-      t += 0.012
+      // "lighten" → overlappende bånd lyser sammen i stedet for å bli grumsete
+      ctx.globalCompositeOperation = "lighten"
+      RIBBONS.forEach((r) => drawRibbon(ctx, t, W, H, r))
+      ctx.globalCompositeOperation = "source-over"
+      t += 0.011
       raf = requestAnimationFrame(frame)
     }
     frame()
@@ -99,11 +98,16 @@ const HeroBlob = () => {
     <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
       <canvas
         ref={canvasRef}
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+        style={{
+          position: "absolute",
+          top: "-15%", right: "-15%",
+          width: "85%", height: "130%",
+          filter: "blur(55px)",
+        }}
       />
       <div style={{
         position: "absolute", inset: 0,
-        background: "linear-gradient(to right, white 45%, transparent 70%), linear-gradient(to bottom, transparent 85%, white 100%)",
+        background: "linear-gradient(to right, white 38%, transparent 62%), linear-gradient(to bottom, transparent 82%, white 100%)",
       }} />
     </div>
   )

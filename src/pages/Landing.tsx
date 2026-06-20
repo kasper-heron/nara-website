@@ -10,11 +10,12 @@ import { useState, useRef, useEffect } from "react";
 /* ────────────────────────── Hero ────────────────────────── */
 
 const RIBBONS = [
-  { color: [147, 197, 253], alpha: 0.82, width: 220, speed: 0.28, offset: 0.0 },
-  { color: [37,  99,  235], alpha: 0.72, width: 190, speed: 0.22, offset: 1.8 },
-  { color: [10,  37,  64],  alpha: 0.65, width: 160, speed: 0.18, offset: 3.4 },
-  { color: [96, 165, 250],  alpha: 0.55, width: 130, speed: 0.32, offset: 5.1 },
-  { color: [191,219,254],   alpha: 0.50, width: 100, speed: 0.15, offset: 2.6 },
+  { color: [191, 219, 254], alpha: 0.90, width: 110, speed: 0.20, offset: 0.0 },
+  { color: [147, 197, 253], alpha: 0.85, width: 90,  speed: 0.16, offset: 1.2 },
+  { color: [59,  130, 246], alpha: 0.80, width: 75,  speed: 0.24, offset: 2.5 },
+  { color: [37,  99,  235], alpha: 0.75, width: 60,  speed: 0.18, offset: 3.8 },
+  { color: [29,  78,  216], alpha: 0.70, width: 50,  speed: 0.14, offset: 5.0 },
+  { color: [10,  37,  64],  alpha: 0.65, width: 40,  speed: 0.22, offset: 6.2 },
 ]
 
 function drawRibbon(
@@ -27,13 +28,12 @@ function drawRibbon(
   const s = (v: number) => Math.sin(t * speed + offset + v)
   const c = (v: number) => Math.cos(t * speed + offset + v)
 
-  // Spine of the ribbon — four bezier control points
-  const ax = W * 0.82 + s(0.0) * 90,   ay = H * -0.05
-  const bx = W * 0.55 + c(0.7) * 100,  by = H * 0.32 + s(1.1) * 55
-  const cx2 = W * 0.38 + s(1.4) * 80,  cy2 = H * 0.62 + c(0.9) * 60
-  const dx = W * 0.60 + c(0.3) * 70,   dy = H * 1.05
+  // Start fra øvre høyre, flyt ned til nedre høyre — hold deg i høyre 45%
+  const ax  = W * 0.72 + s(0.0) * 30,  ay  = H * -0.1
+  const bx  = W * 0.62 + c(0.5) * 35,  by  = H * 0.28 + s(0.8) * 25
+  const cx2 = W * 0.58 + s(1.1) * 30,  cy2 = H * 0.62 + c(0.6) * 30
+  const dx  = W * 0.68 + c(0.3) * 25,  dy  = H * 1.05
 
-  // Perpendicular offset for ribbon thickness
   const nx1 = -(by - ay), ny1 = bx - ax
   const len1 = Math.hypot(nx1, ny1) || 1
   const ox1 = (nx1 / len1) * (width / 2), oy1 = (ny1 / len1) * (width / 2)
@@ -95,7 +95,7 @@ const HeroBlob = () => {
       />
       <div style={{
         position: "absolute", inset: 0,
-        background: "linear-gradient(to right, white 30%, transparent 60%), linear-gradient(to bottom, transparent 80%, white 100%)",
+        background: "linear-gradient(to right, white 45%, transparent 70%), linear-gradient(to bottom, transparent 85%, white 100%)",
       }} />
     </div>
   )

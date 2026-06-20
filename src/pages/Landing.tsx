@@ -9,15 +9,16 @@ import { useState, useRef, useEffect } from "react";
 
 /* ────────────────────────── Hero ────────────────────────── */
 
+// Lyse blåtoner kun — ingen navy
 const RIBBONS = [
-  { color: [219, 234, 254], speed: 0.12, angleOffset: -0.35, spread: 0.10 },
-  { color: [191, 219, 254], speed: 0.10, angleOffset: -0.20, spread: 0.09 },
-  { color: [147, 197, 253], speed: 0.09, angleOffset: -0.05, spread: 0.08 },
-  { color: [96,  165, 250], speed: 0.11, angleOffset:  0.10, spread: 0.08 },
-  { color: [59,  130, 246], speed: 0.08, angleOffset:  0.25, spread: 0.07 },
-  { color: [37,   99, 235], speed: 0.10, angleOffset:  0.40, spread: 0.07 },
-  { color: [29,   78, 216], speed: 0.09, angleOffset:  0.55, spread: 0.06 },
-  { color: [10,   37,  64], speed: 0.07, angleOffset:  0.70, spread: 0.06 },
+  { color: [224, 242, 255], alpha: 0.95, spread: 0.055, speed: 0.09, angleOffset: -0.42 },
+  { color: [186, 224, 255], alpha: 0.90, spread: 0.048, speed: 0.07, angleOffset: -0.26 },
+  { color: [147, 197, 253], alpha: 0.88, spread: 0.042, speed: 0.11, angleOffset: -0.10 },
+  { color: [96,  165, 250], alpha: 0.85, spread: 0.038, speed: 0.08, angleOffset:  0.06 },
+  { color: [59,  130, 246], alpha: 0.82, spread: 0.034, speed: 0.10, angleOffset:  0.22 },
+  { color: [37,   99, 235], alpha: 0.78, spread: 0.030, speed: 0.07, angleOffset:  0.38 },
+  { color: [99,  179, 255], alpha: 0.72, spread: 0.026, speed: 0.12, angleOffset:  0.54 },
+  { color: [147, 210, 255], alpha: 0.65, spread: 0.022, speed: 0.08, angleOffset:  0.70 },
 ]
 
 function drawRibbon(
@@ -25,42 +26,38 @@ function drawRibbon(
   t: number,
   W: number,
   H: number,
-  { color, speed, angleOffset, spread }: typeof RIBBONS[0],
+  { color, alpha, spread, speed, angleOffset }: typeof RIBBONS[0],
   idx: number
 ) {
-  // Alle bånd starter fra samme punkt øverst til høyre (vifte-effekt)
-  const ox = W * 1.05
-  const oy = H * -0.05
+  // Alle starter fra øvre høyre hjørne
+  const ox = W * 1.08, oy = H * -0.08
 
-  // Sakte svingende vinkel per bånd
-  const baseAngle = Math.PI * 0.52 + angleOffset
-  const sway = Math.sin(t * speed + idx * 0.8) * 0.06
+  // Vinkel svinger sakte og organisk
+  const baseAngle = Math.PI * 0.54 + angleOffset
+  const sway = Math.sin(t * speed + idx * 1.1) * 0.045
   const angle = baseAngle + sway
 
-  // Lengde og bredde
-  const len = Math.hypot(W, H) * 1.1
-  const hw = W * spread
+  const len = Math.hypot(W, H) * 1.2
+  const hw  = W * spread
 
-  // Endepunkt langs vinkelen
-  const ex = ox + Math.cos(angle) * len
-  const ey = oy + Math.sin(angle) * len
+  // To kontrollpunkter for S-kurve (silk-effekt)
+  const c1x = ox + Math.cos(angle + Math.sin(t * speed * 0.6 + idx) * 0.07) * len * 0.38
+  const c1y = oy + Math.sin(angle + Math.sin(t * speed * 0.6 + idx) * 0.07) * len * 0.38
+  const c2x = ox + Math.cos(angle + Math.cos(t * speed * 0.5 + idx + 1) * 0.05) * len * 0.72
+  const c2y = oy + Math.sin(angle + Math.cos(t * speed * 0.5 + idx + 1) * 0.05) * len * 0.72
+  const ex  = ox + Math.cos(angle) * len
+  const ey  = oy + Math.sin(angle) * len
 
-  // Kontrollpunkt — lett kurve
-  const curve = Math.sin(t * speed * 0.7 + idx) * 0.08
-  const cx = ox + Math.cos(angle + curve) * len * 0.5
-  const cy = oy + Math.sin(angle + curve) * len * 0.5
-
-  // Perpendikulær for båndtykkelse
   const px = -Math.sin(angle), py = Math.cos(angle)
 
   const [r, g, b] = color
   ctx.beginPath()
   ctx.moveTo(ox + px * hw, oy + py * hw)
-  ctx.quadraticCurveTo(cx + px * hw, cy + py * hw, ex + px * hw, ey + py * hw)
+  ctx.bezierCurveTo(c1x + px * hw, c1y + py * hw, c2x + px * hw, c2y + py * hw, ex + px * hw, ey + py * hw)
   ctx.lineTo(ex - px * hw, ey - py * hw)
-  ctx.quadraticCurveTo(cx - px * hw, cy - py * hw, ox - px * hw, oy - py * hw)
+  ctx.bezierCurveTo(c2x - px * hw, c2y - py * hw, c1x - px * hw, c1y - py * hw, ox - px * hw, oy - py * hw)
   ctx.closePath()
-  ctx.fillStyle = `rgba(${r},${g},${b},0.75)`
+  ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`
   ctx.fill()
 }
 

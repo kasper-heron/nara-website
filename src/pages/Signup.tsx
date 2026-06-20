@@ -218,13 +218,13 @@ const Signup = () => {
         <div />
         <div className="relative">
           <p className="display-md max-w-[380px]" style={{ color: "var(--night-text)" }}>
-            «Koble til Gmail og Fiken. Resten ordner seg selv.»
+            «Koble til e-post og regnskapssystemet ditt. Resten ordner seg selv.»
           </p>
           <div className="mt-10 space-y-3">
             {[
               "Fakturaer hentes automatisk fra innboksen",
               "Kontert etter NS 4102 med riktige MVA-koder",
-              "Godkjente bilag bokføres rett i Fiken",
+              "Godkjente bilag bokføres rett i regnskapssystemet",
             ].map((t) => (
               <p key={t} className="flex items-center gap-2.5 text-[14.5px]" style={{ color: "var(--night-soft)" }}>
                 <Check size={15} strokeWidth={2.5} style={{ color: "var(--blue)" }} />

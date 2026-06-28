@@ -87,31 +87,14 @@ export default function Vilkar() {
             {" "}· NARA
           </p>
 
-          <div
-            style={{
-              background: "#fffbeb",
-              border: "1px solid #fde68a",
-              borderRadius: 10,
-              padding: "14px 18px",
-              marginBottom: 40,
-              fontSize: 14,
-              color: "#92400e",
-              lineHeight: 1.6,
-            }}
-          >
-            <strong>Status:</strong> NARA er under oppstart, og selskapet som vil drifte tjenesten er
-            ikke formelt registrert som aksjeselskap ennå. Denne siden oppdateres med fullt organisasjonsnummer
-            og selskapsnavn så snart registreringen er gjennomført.
-          </div>
-
           <Section
             id="avtaleparter"
             title="1. Avtaleparter"
             summary="Avtalen gjelder mellom deg (kunden) og selskapet som drifter NARA."
           >
             <p>
-              Disse vilkårene er en avtale mellom <strong>[NARA AS — org.nr. kommer ved registrering]</strong>
-              {" "}("NARA", "vi") og bedriften som registrerer en konto og bruker tjenesten ("kunden", "du").
+              Disse vilkårene er en avtale mellom <strong>NARA</strong>{" "}
+              ("NARA", "vi") og bedriften som registrerer en konto og bruker tjenesten ("kunden", "du").
             </p>
             <p style={{ marginTop: 12 }}>
               Ved å registrere en konto eller bruke tjenesten bekrefter du at du har anledning til å binde
@@ -233,7 +216,7 @@ export default function Vilkar() {
             <p>
               Disse vilkårene er underlagt norsk rett. Tvister knyttet til avtalen søkes først løst gjennom
               forhandlinger. Dersom det ikke fører til en løsning, kan tvisten bringes inn for de norske
-              domstolene, med [verneting kommer ved registrering av AS] som rett verneting.
+              domstolene, med Oslo som rett verneting.
             </p>
           </Section>
 

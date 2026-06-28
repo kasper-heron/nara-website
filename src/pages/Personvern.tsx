@@ -95,9 +95,7 @@ export default function Personvern() {
             summary="Selskapet bak NARA er ansvarlig for personopplysningene vi behandler. Når du bruker tjenesten behandler vi data på vegne av deg som bedrift."
           >
             <p>
-              NARA er under oppstart, og selskapet som vil drifte tjenesten er ikke formelt registrert som
-              aksjeselskap ennå. Denne siden oppdateres med fullt organisasjonsnummer og selskapsnavn så snart
-              registreringen er gjennomført. Frem til da er behandlingsansvarlig den fysiske personen som drifter NARA.
+              NARA er behandlingsansvarlig for opplysninger knyttet til brukerkontoer, innlogging og kontaktinformasjon.
             </p>
             <p style={{ marginTop: 12 }}>
               Vi behandler opplysninger knyttet til brukerkontoer, innlogging og kontaktinformasjon.

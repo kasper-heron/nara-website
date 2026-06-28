@@ -8,6 +8,7 @@ import HowItWorks from "./pages/HowItWorks";
 import Pricing from "./pages/Pricing";
 import Signup from "./pages/Signup";
 import Personvern from "./pages/Personvern";
+import Vilkar from "./pages/Vilkar";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -43,6 +44,7 @@ const App = () => (
           <Route path="/registrer"          element={<Navigate to="/signup" replace />} />
           <Route path="/kom-i-gang"         element={<Navigate to="/signup" replace />} />
           <Route path="/personvern"         element={<Personvern />} />
+          <Route path="/vilkar"             element={<Vilkar />} />
           <Route path="/logg-inn"           element={<AppRedirect />} />
           <Route path="/login"              element={<AppRedirect />} />
           <Route path="/dashboard"          element={<AppRedirect />} />

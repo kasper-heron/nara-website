@@ -29,6 +29,7 @@ const SiteFooter = () => (
             </p>
             <ul className="space-y-2.5 text-[14px]">
               <li><Link to="/personvern" className="hover:underline" style={{ color: "var(--ink-soft)" }}>Personvern</Link></li>
+              <li><Link to="/vilkar" className="hover:underline" style={{ color: "var(--ink-soft)" }}>Vilkår</Link></li>
               <li><a href="mailto:hei@naraflow.no" className="hover:underline" style={{ color: "var(--ink-soft)" }}>Kontakt</a></li>
             </ul>
           </div>

@@ -92,10 +92,15 @@ export default function Personvern() {
           <Section
             id="hvem"
             title="1. Hvem vi er"
-            summary="NARA AS er ansvarlig for personopplysningene vi behandler. Når du bruker tjenesten behandler vi data på vegne av deg som bedrift."
+            summary="Selskapet bak NARA er ansvarlig for personopplysningene vi behandler. Når du bruker tjenesten behandler vi data på vegne av deg som bedrift."
           >
             <p>
-              NARA AS er behandlingsansvarlig for opplysninger knyttet til brukerkontoer, innlogging og kontaktinformasjon.
+              NARA er under oppstart, og selskapet som vil drifte tjenesten er ikke formelt registrert som
+              aksjeselskap ennå. Denne siden oppdateres med fullt organisasjonsnummer og selskapsnavn så snart
+              registreringen er gjennomført. Frem til da er behandlingsansvarlig den fysiske personen som drifter NARA.
+            </p>
+            <p style={{ marginTop: 12 }}>
+              Vi behandler opplysninger knyttet til brukerkontoer, innlogging og kontaktinformasjon.
               Når du laster opp eller kobler til fakturaer og e-post, behandler vi disse dataene som databehandler på vegne av deg — du bestemmer formålet.
             </p>
             <p style={{ marginTop: 12 }}>
